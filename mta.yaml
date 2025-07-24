@@ -1,0 +1,134 @@
+_schema-version: 3.3.0
+ID: DigitalSweepIntern
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: DigitalSweepIntern-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: DigitalSweepIntern-auth
+  - name: DigitalSweepIntern-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+- name: DigitalSweepIntern-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: DigitalSweepIntern-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: DigitalSweepIntern
+  type: approuter.nodejs
+  path: app/router
+  requires:
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      url: ~{srv-url}
+  - name: DigitalSweepIntern-auth
+  - name: DigitalSweepIntern-destination-service
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  provides:
+  - name: app-api
+    properties:
+      app-protocol: ${protocol}
+      app-uri: ${default-uri}
+  parameters:
+    disk-quota: 256M
+    keep-existing-routes: true
+    memory: 256M
+- name: DigitalSweepIntern-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: DigitalSweepIntern-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - dgfiori.zip
+      name: dgfiori
+      target-path: resources/
+- name: dgfiori
+  type: html5
+  path: app/dg-fiori
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: DigitalSweepIntern-auth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      oauth2-configuration:
+        redirect-uris:
+        - https://*~{app-api/app-uri}/**
+      tenant-mode: dedicated
+      xsappname: DigitalSweepIntern-${org}-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+  requires:
+  - name: app-api
+- name: DigitalSweepIntern-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    config:
+      plugin:
+      - name: com.sap.hana.di.afllangprocedure
+      - name: com.sap.hana.di.virtualfunctionpackage.hadoop
+    service: hana
+    service-plan: hdi-shared
+- name: DigitalSweepIntern-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: DigitalSweepIntern-html5-service
+    service-plan: app-host
+- name: DigitalSweepIntern-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: DigitalSweepIntern-destination-service
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
