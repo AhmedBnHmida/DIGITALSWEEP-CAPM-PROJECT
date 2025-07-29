@@ -1,0 +1,56 @@
+//copy the request and test it in the test.http file
+// ======================================
+// GET - all records
+GET http://localhost:4004/odata/v4/financeservice/Finance
+Accept: application/json
+
+
+
+// ======================================
+// GET - Finance by ID (e.g., No = 1010)
+GET http://localhost:4004/odata/v4/financeservice/Finance(No=1010)
+Accept: application/json
+
+
+
+// ======================================
+// POST - Add new Finance record
+POST http://localhost:4004/odata/v4/financeservice/Finance
+Content-Type: application/json
+{
+  "No": 1010,
+  "Segment": "Government",
+  "Country": "France",
+  "Product": "Monitor",
+  "Discount_Band": "Low",
+  "Units_Sold": 100,
+  "Manufacturing_Price": 500.00,
+  "Sale_Price": 700.00,
+  "Gross_Sales": 70000.00,
+  "Discounts": 5000.00,
+  "Sales": 65000.00,
+  "COGS": 40000.00,
+  "Profit": 25000.00,
+  "Date": "2025-07-28",
+  "Month_Number": 7,
+  "Month_Name": "July",
+  "Year": 2025
+}
+
+
+
+// ======================================
+// PATCH - Update record by ID
+PATCH http://localhost:4004/odata/v4/financeservice/Finance(No=1010)
+Content-Type: application/json
+
+{
+  "Profit": 26000.00,
+  "Discount_Band": "Medium"
+}
+
+
+
+// ======================================
+// DELETE - Remove record by ID
+DELETE http://localhost:4004/odata/v4/financeservice/Finance(No=1010)

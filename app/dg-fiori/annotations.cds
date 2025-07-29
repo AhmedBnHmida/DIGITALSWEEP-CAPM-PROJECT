@@ -103,13 +103,13 @@ annotate service.Finance with @(
                 $Type : 'UI.DataField',
                 Label : 'Month_Name',
                 Value : Month_Name,
-            },/*
+            },
             {
                 $Type : 'UI.DataField',
                 Label : 'Year',
                 Value : Year,
             },
-            */
+
         ],
     },
 
@@ -153,6 +153,22 @@ annotate service.Finance with @(
             Label : 'Units_Sold',
             Value : Units_Sold,
         },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Units_Sold',
+            Value : Units_Sold,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Manufacturing_Price',
+            Value : Manufacturing_Price,
+        },
+        {
+        $Type : 'UI.DataField',
+            Label : 'Sale_Price',
+            Value : Sale_Price,
+        }
+
     ],
 
 
@@ -251,7 +267,9 @@ annotate service.Finance with @(
     UI.SelectionFields  : [
         Segment,
         //Product,
-        Country
+        Country,
+        Date,
+        Month_Number
     ],
 
 
@@ -321,7 +339,56 @@ annotate service.Finance with @(
 
 /*************************************************************************************************** */
 // === ... ===
-
-
+/*
+    FilterRestrictions : {
+        $Type              : 'Capabilities.FilterRestrictionsType',
+        RequiredProperties : [ Date ],
+        FilterExpressionRestrictions : [
+            {
+                $Type : 'Capabilities.FilterExpressionRestrictionType',
+                Property : Date,
+                
+            }
+        ]
+    }
+*/
 );
+
+annotate service.Finance with {
+    Month_Number @(
+        Common.Label : '{i18n>MouthNumber}',
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Finance',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : Month_Number,
+                    ValueListProperty : 'Month_Number',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true,
+        Common.Text : Month_Name,
+    )
+};
+
+annotate service.Finance with {
+    Date @(
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Finance',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : Date,
+                    ValueListProperty : 'Date',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true,
+)
+
+};
+
 
