@@ -65,9 +65,23 @@ modules:
       - dgfiori.zip
       name: dgfiori
       target-path: resources/
+    - artifacts:
+      - customdgfiori.zip
+      name: customdgfiori
+      target-path: resources/
 - name: dgfiori
   type: html5
   path: app/dg-fiori
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: customdgfiori
+  type: html5
+  path: app/custom-dg-fiori
   build-parameters:
     build-result: dist
     builder: custom
