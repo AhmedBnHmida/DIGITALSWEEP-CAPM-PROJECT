@@ -62,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -94,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "FinanceList",
-          "target": "FinanceList"
+          "target": [
+            "FinanceList"
+          ]
         },
         {
           "pattern": "Finance({key}):?query:",
           "name": "FinanceObjectPage",
-          "target": "FinanceObjectPage"
+          "target": [
+            "FinanceList",
+            "FinanceObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -114,29 +126,24 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-
-
-              
               "entitySet": "Finance",
-              "views": { "paths": [
-                {
-                  "key": "tab0",
-                  "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVSOTable"
-                },
-                {
-                  "key": "tab1",
-                  "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVROChart"
-                },
-                {
-                  "key": "tab2",
-                  "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SelPreVarRO"
-                }
+              "views": {
+                "paths": [
+                  {
+                    "key": "tab0",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVSOTable"
+                  },
+                  {
+                    "key": "tab1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVROChart"
+                  },
+                  {
+                    "key": "tab2",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SelPreVarRO"
+                  }
                 ],
                 "showCounts": true
               },
-
-
-
               "contextPath": "/Finance",
               "variantManagement": "Page",
               "navigation": {
@@ -152,9 +159,12 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "FinanceObjectPage": {
           "type": "Component",
@@ -165,9 +175,17 @@
               "editableHeaderContent": false,
               "contextPath": "/Finance"
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/Finance({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
