@@ -359,12 +359,12 @@ annotate service.Finance with {
         Common.Label : '{i18n>MouthNumber}',
         Common.ValueList : {
             $Type : 'Common.ValueListType',
-            CollectionPath : 'Finance',
+            CollectionPath : 'MouthNumber',
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
                     LocalDataProperty : Month_Number,
-                    ValueListProperty : 'Month_Number',
+                    ValueListProperty : 'number',
                 },
             ],
         },
@@ -374,21 +374,6 @@ annotate service.Finance with {
 };
 
 annotate service.Finance with {
-    Date @(
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Finance',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : Date,
-                    ValueListProperty : 'Date',
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true,
-)
-
+    Date @Common.Label : 'Date';
 };
-
 
