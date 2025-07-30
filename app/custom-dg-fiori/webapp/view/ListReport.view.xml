@@ -1,0 +1,73 @@
+<mvc:View
+    controllerName="customdgfiori.controller.ListReport"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page
+        title="Finance List"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        class="sapUiContentPadding">
+
+        <Button
+            text="Create New Finance Entry"
+            type="Emphasized"
+            press=".onCreatePress"/>
+
+        <Table
+            id="financeTable"
+            inset="false"
+            headerText="Finance Records"
+            growing="true"
+            growingThreshold="20"
+            items="{
+                path: '/Finance'
+            }">
+
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="Finance Data"/>
+                </Toolbar>
+            </headerToolbar>
+
+            <columns>
+                <Column>
+                    <Text text="Segment"/>
+                </Column>
+                <Column>
+                    <Text text="Country"/>
+                </Column>
+                <Column>
+                    <Text text="Product"/>
+                </Column>
+                <Column>
+                    <Text text="Sales"/>
+                </Column>
+                <Column>
+                    <Text text="Profit"/>
+                </Column>
+                <Column>
+                    <Text text="Date"/>
+                </Column>
+                <!-- Add more columns here if needed -->
+            </columns>
+
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{Segment}"/>
+                        <Text text="{Country}"/>
+                        <Text text="{Product}"/>
+                        <Text text="{Sales}"/>
+                        <Text text="{Profit}"/>
+                        <Text text="{path: 'Date', formatter: '.formatDate'}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+
+        </Table>
+
+    </Page>
+
+</mvc:View>

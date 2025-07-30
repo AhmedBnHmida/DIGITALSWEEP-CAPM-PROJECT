@@ -1,6 +1,8 @@
-using {myFinance} from '/home/user/projects/DigitalSweepIntern/db/schema.cds'; 
-service Financeservice  
-{ 
+using {myFinance} from '/home/user/projects/DigitalSweepIntern/db/schema.cds';
 
-  entity Finance as projection on myFinance.Finance
+service Financeservice 
+{
+  entity Finance as projection on myFinance.Finance;
+  entity MouthNumber as projection on myFinance.MouthNumber
+
 }

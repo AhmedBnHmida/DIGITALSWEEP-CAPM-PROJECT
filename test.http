@@ -1,2 +1,2 @@
-GET http://localhost:4004/odata/v4/financeservice/Finance(No=1010)
+GET http://localhost:4004/odata/v4/financeservice/MouthNumber
 Accept: application/json
