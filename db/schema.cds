@@ -15,10 +15,20 @@ namespace myFinance;
         { Property: 'Profit' }
     ]
 }
+/*
+@Capabilities : {
+   FilterRestrictions : {
+      FilterExpressionRestrictions : [
+         {
+            Property : 'Date',
+            AllowedExpressions : 'SingleRange'
+         }
+      ]
+   }
+}
+*/
 
-
-
-entity Finance @(odata.draft.enabled) { 
+entity Finance  { 
 
     key No:Integer;
     Segment:String;
@@ -32,7 +42,7 @@ entity Finance @(odata.draft.enabled) {
     Discounts:Decimal(10,2);	 
     Sales:Decimal(10,2);
     COGS:Decimal(10,2);	
-    Profit:Decimal(10,2);	
+    Profit:Decimal(10,2); 
     Date:Date;
     Month_Number:Integer;
     Month_Name:String; 	
@@ -42,5 +52,11 @@ entity Finance @(odata.draft.enabled) {
 entity  MouthNumber {
 
     key number:Integer;
+
+}
+
+entity  Segments {
+
+    key SegmentName:String;
 
 }

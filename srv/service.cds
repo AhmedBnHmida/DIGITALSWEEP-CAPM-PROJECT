@@ -2,7 +2,17 @@ using {myFinance} from '/home/user/projects/DigitalSweepIntern/db/schema.cds';
 
 service Financeservice 
 {
-  entity Finance as projection on myFinance.Finance;
-  entity MouthNumber as projection on myFinance.MouthNumber
+
+  // Draft-enabled entity for CRUD
+  entity Finance @odata.draft.enabled as projection on myFinance.Finance;
+
+
+  // Read-only projection for charts (no draft!)
+  entity FinanceChart as projection on myFinance.Finance;
+  
+
+  entity MouthNumber as projection on myFinance.MouthNumber;
+  entity Segments as projection on myFinance.Segments;
+
 
 }
