@@ -1,4 +1,190 @@
 using Financeservice as service from '../../srv/service';
+
+annotate service.FinanceChart with @(
+  
+
+/*************************************************************************************************** */
+// === Chart Definition  ===
+
+    UI.Chart #ROChart: {
+        $Type: 'UI.ChartDefinitionType',
+        ChartType: #Column,
+        Measures: ['Sales','Profit'],
+        Dimensions: ['Country','Segment'],
+        Title : 'Finance Report',
+        DynamicMeasures : ['@Analytics.AggregatedProperty#sales_sum','@Analytics.AggregatedProperty#profit_sum'],
+    },    
+
+
+/*************************************************************************************************** */
+// === Aggregated Properties for Chart Dynamic Measures ===
+
+
+    Analytics.AggregatedProperty #sales_sum : 
+    {
+        $Type : 'Analytics.AggregatedPropertyType',
+        Name : 'sales_sum',
+        AggregatableProperty : Sales,
+        AggregationMethod :'sum',
+        @Common.Label : 'Sales Sum'
+    },
+
+
+    Analytics.AggregatedProperty #profit_sum:
+    {
+        $Type:'Analytics.AggregatedPropertyType',
+        Name:'profit_sum',
+        AggregatableProperty:Profit,
+        AggregationMethod:'sum',
+        @Common.Label:'Profit Sum'
+    },
+
+
+    UI.SelectionPresentationVariant #SPVROChart  : {
+            $Type              : 'UI.SelectionPresentationVariantType',
+            Text               : 'Chart View',
+            SelectionVariant   : {
+                $Type        : 'UI.SelectionVariantType',
+                Text         : 'Chart View',
+                // This is the default filter (can be adjusted based on requirement)
+                /*SelectOptions: [{
+                    $Type       : 'UI.SelectOptionType',
+                    PropertyName: No,
+                    Ranges      : [{
+                        $Type : 'UI.SelectionRangeType',
+                        Sign  : #I,
+                        Option: #EQ,
+                        Low   : 'No'
+                    } ]
+                } ]*/
+            },
+            PresentationVariant: {
+                $Type         : 'UI.PresentationVariantType',
+                Visualizations: ['@UI.Chart#ROChart']
+            }
+    },
+);
+
+
+
+
+
+/************************************************************************************************************************* 
+ 
+ 
+************************************************************************************************************************** 
+
+
+************************************************************************************************************************** */
+
+annotate service.Finance with @Capabilities.FilterRestrictions : {
+    FilterExpressionRestrictions : [
+        {
+            Property : 'Date',
+            AllowedExpressions : 'SingleRange'
+        }
+    ]
+};
+
+annotate service.Finance with {
+    Month_Number @(
+        Common.Label : '{i18n>MouthNumber}',
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'MouthNumber',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : Month_Number,
+                    ValueListProperty : 'number',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true,
+        Common.Text : Month_Name,
+    );
+    Segment             @(
+        title:'Segment',
+        Common:
+        {
+            ValueListWithFixedValues, // it provide the drop down box
+            ValueList : {
+                $Type : 'Common.ValueListType',
+                CollectionPath : 'Segments', // entity name
+                Parameters:
+                [
+                    {
+                        $Type:'Common.ValueListParameterInOut',
+                        LocalDataProperty:Segment,
+                        ValueListProperty:'SegmentName' // column name of Segments entity
+                    }
+                ]
+            },
+        }
+    );
+    
+
+/*
+    No                  @title: 'No';
+    Product             @title: 'Product';
+    Discounts           @title: 'Discounts';
+    Sales               @title: 'Sales';
+    COGS                @title: 'Cost of goods sold';
+    Profit              @title: 'Profit';
+    Date                @title: 'Date';
+    Discount_Band       @title: 'Discount Band';
+    Units_Sold          @title: 'Units Sold';
+    Manufacturing_Price @title: 'Manufacturing Price';
+    Sale_Price          @title: 'Sale Price';
+    Gross_Sales         @title: 'Gross Sales';
+    Year                @title: 'Year';
+*/
+/*
+    Month_Name          @(
+        title:'Month Name',
+        Common:
+        {
+            ValueListWithFixedValues, // it provide the drop down box
+            ValueList : {
+                $Type : 'Common.ValueListType',
+                CollectionPath : 'Month_Name', // entity name
+                Parameters:
+                [
+                    {
+                        $Type:'Common.ValueListParameterInOut',
+                        LocalDataProperty:Month_Name, // column name of Finance entity
+                        ValueListProperty:'Month_Names' // column name of Month_Name entity
+                    }
+                ]
+            },
+        }
+    );
+
+    Country             @(
+        title:'Country',
+        Common:
+        {
+            ValueListWithFixedValues, // it provide the drop down box
+            ValueList : {
+                $Type : 'Common.ValueListType',
+                CollectionPath : 'Country', // entity name
+                Parameters:
+                [
+                    {
+                        $Type:'Common.ValueListParameterInOut',
+                        LocalDataProperty:Country,
+                        ValueListProperty:'CountryName' // column name of segments entity
+                    }
+                ]
+            },
+        }
+    );
+*/
+};
+
+
+
+
 annotate service.Finance with @(
 
 
@@ -128,6 +314,16 @@ annotate service.Finance with @(
 
 
     UI.LineItem #SOTable: [
+        /*
+        {
+            $Type: 'UI.DataFieldForIntentBasedNavigation',
+            Label: 'Open Chart',
+            SemanticObject: 'dg_fioriLd',
+            Action: 'manage',
+            RequiresContext: false,
+            Inline: false
+        },
+        */
         {
             $Type : 'UI.DataField',
             Label : 'No',
@@ -173,43 +369,7 @@ annotate service.Finance with @(
 
 
 /*************************************************************************************************** */
-// === Chart Definition  ===
-
-    UI.Chart #ROChart: {
-        $Type: 'UI.ChartDefinitionType',
-        ChartType: #Column,
-        Measures: ['Sales','Profit'],
-        Dimensions: ['Country','Segment'],
-        Title : 'Finance Report',
-        DynamicMeasures : ['@Analytics.AggregatedProperty#sales_sum','@Analytics.AggregatedProperty#profit_sum'],
-    },    
-
-
-/*************************************************************************************************** */
-// === Aggregated Properties for Chart Dynamic Measures ===
-
-
-    Analytics.AggregatedProperty #sales_sum : 
-    {
-        $Type : 'Analytics.AggregatedPropertyType',
-        Name : 'sales_sum',
-        AggregatableProperty : Sales,
-        AggregationMethod :'sum',
-        @Common.Label : 'Sales Sum'
-    },
-
-    Analytics.AggregatedProperty #profit_sum:
-    {
-        $Type:'Analytics.AggregatedPropertyType',
-        Name:'profit_sum',
-        AggregatableProperty:Profit,
-        AggregationMethod:'sum',
-        @Common.Label:'Profit Sum'
-    },
-
-
-/*************************************************************************************************** */
-// === New UI annotations defining multiple views (table & chart) ===
+// === New UI annotations defining multiple views (table & ) ===
 
 
     UI.SelectionPresentationVariant #SPVSOTable  : {
@@ -235,29 +395,7 @@ annotate service.Finance with @(
                 Visualizations: ['@UI.LineItem#SOTable']
             }
     },
-    UI.SelectionPresentationVariant #SPVROChart  : {
-            $Type              : 'UI.SelectionPresentationVariantType',
-            Text               : 'Chart View',
-            SelectionVariant   : {
-                $Type        : 'UI.SelectionVariantType',
-                Text         : 'Chart View',
-                // This is the default filter (can be adjusted based on requirement)
-                /*SelectOptions: [{
-                    $Type       : 'UI.SelectOptionType',
-                    PropertyName: No,
-                    Ranges      : [{
-                        $Type : 'UI.SelectionRangeType',
-                        Sign  : #I,
-                        Option: #EQ,
-                        Low   : 'No'
-                    } ]
-                } ]*/
-            },
-            PresentationVariant: {
-                $Type         : 'UI.PresentationVariantType',
-                Visualizations: ['@UI.Chart#ROChart']
-            }
-    },
+    
 
 
 /*************************************************************************************************** */
@@ -339,41 +477,4 @@ annotate service.Finance with @(
 
 /*************************************************************************************************** */
 // === ... ===
-/*
-    FilterRestrictions : {
-        $Type              : 'Capabilities.FilterRestrictionsType',
-        RequiredProperties : [ Date ],
-        FilterExpressionRestrictions : [
-            {
-                $Type : 'Capabilities.FilterExpressionRestrictionType',
-                Property : Date,
-                
-            }
-        ]
-    }
-*/
 );
-
-annotate service.Finance with {
-    Month_Number @(
-        Common.Label : '{i18n>MouthNumber}',
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'MouthNumber',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : Month_Number,
-                    ValueListProperty : 'number',
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true,
-        Common.Text : Month_Name,
-    )
-};
-
-annotate service.Finance with {
-    Date @Common.Label : 'Date';
-};
-

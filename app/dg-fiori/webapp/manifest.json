@@ -126,19 +126,26 @@
           "options": {
             "settings": {
               "entitySet": "Finance",
+              "loadDraftData": true,
+              "dataLoadSettings": {
+                "loadDataOnAppLaunch": "always"
+              },
               "views": {
                 "paths": [
                   {
                     "key": "tab0",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVSOTable"
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVSOTable",
+                    "entitySet": "Finance"
                   },
                   {
                     "key": "tab1",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVROChart"
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SPVROChart",
+                    "entitySet": "FinanceChart"
                   },
                   {
                     "key": "tab2",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SelPreVarRO"
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#SelPreVarRO",
+                    "entitySet": "Finance"
                   }
                 ],
                 "showCounts": true
