@@ -1,118 +1,28 @@
-<mvc:View controllerName="customdgfiori.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:tnt="sap.tnt"
-    >
-    <Page id="page" title="{i18n>title}" showHeader="false"> <!-- no default header, you add your own fixed header -->
+<mvc:View
+  controllerName="customdgfiori.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
 
-        <!-- Tool Header -->
-        <tnt:ToolHeader id="shellLikeToolHeader" class="sapUiTinyMargin">
-			<Button icon="sap-icon://menu2" type="Transparent" tooltip="Menu" press=".onCollapseExpandPress" >
-				<layoutData>
-					<OverflowToolbarLayoutData priority="NeverOverflow"/>
-				</layoutData>
-			</Button>
-			<Image src="test-resources/sap/tnt/images/SAP_Logo.png" decorative="false" press="onLogoPressed" tooltip="SAP Logo" width="60px" height="30px">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="NeverOverflow"/>
-				</layoutData>
-			</Image>
-			<Title text="Prоduct Name" wrapping="false" id="productName">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="Disappear"/>
-				</layoutData>
-			</Title>
-			<Text text="Second title" wrapping="false" id="secondTitle">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="Disappear"/>
-				</layoutData>
-			</Text>
-			<ToolbarSpacer />
-			<SearchField width="25rem" id="searchField">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="Low" group="1"/>
-				</layoutData>
-			</SearchField>
-			<Button visible="false" icon="sap-icon://search" type="Transparent" id="searchButton" tooltip="Search"/>
-			<OverflowToolbarButton icon="sap-icon://da" type="Transparent" tooltip="Joule" text="Joule">
-				<layoutData>
-					<OverflowToolbarLayoutData group="2"/>
-				</layoutData>
-			</OverflowToolbarButton>
-			<OverflowToolbarButton icon="sap-icon://source-code" type="Transparent" tooltip="Action 1" text="Action 1">
-				<layoutData>
-					<OverflowToolbarLayoutData group="2"/>
-				</layoutData>
-			</OverflowToolbarButton>
-			<OverflowToolbarButton icon="sap-icon://card" type="Transparent" tooltip="Action 2" text="Action 2">
-				<layoutData>
-					<OverflowToolbarLayoutData group="2"/>
-				</layoutData>
-			</OverflowToolbarButton>
-			<OverflowToolbarButton icon="sap-icon://action-settings" type="Transparent" text="Settings"/>
-			<Button icon="sap-icon://bell" type="Transparent" tooltip="Notification">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="NeverOverflow"/>
-				</layoutData>
-			</Button>
-			<tnt:ToolHeaderUtilitySeparator/>
-			<OverflowToolbarButton icon="sap-icon://grid" type="Transparent" text="My Products" tooltip="My Products"/>
-			<Avatar src="test-resources/sap/tnt/images/Woman_avatar_01.png" displaySize="XS" press=".onAvatarPressed" tooltip="Profile">
-				<layoutData>
-					<OverflowToolbarLayoutData priority="NeverOverflow"/>
-				</layoutData>
-			</Avatar>
-		</tnt:ToolHeader>
+<!--<Page title="Add New Record" showNavButton="true" navButtonPress=".onNavBack">-->
+<Page showHeader="false">
+  <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+    <Title text="Welcome to the Dashboard" level="H2"/>
 
-    <HBox >
-        <VBox >
-        <!-- Side Navigation -->
-        <tnt:SideNavigation id="sideNavigation" selectedKey="walked" expanded="false">
-			<tnt:NavigationList>
-				<tnt:NavigationListItem text="Home" icon="sap-icon://home" />
-				<tnt:NavigationListItem text="List" icon="sap-icon://list" press=".onListPress" />
-				<tnt:NavigationListItem text="Create" icon="sap-icon://add" press=".onCreatePress" />
-				<tnt:NavigationListGroup text="New">
-					<tnt:NavigationListItem text="People" icon="sap-icon://people-connected" />
-					<tnt:NavigationListItem text="Building" icon="sap-icon://building" >
-						<tnt:NavigationListItem text="Office 01" />
-						<tnt:NavigationListItem text="Office 02" />
-					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Mileage" icon="sap-icon://mileage" >
-						<tnt:NavigationListItem text="Driven" />
-						<tnt:NavigationListItem text="Walked" id="walked" />
-					</tnt:NavigationListItem>
-				</tnt:NavigationListGroup>
-				<tnt:NavigationListGroup text="Recently used">
-					<tnt:NavigationListItem text="Managing My Area" icon="sap-icon://kpi-managing-my-area" />
-					<tnt:NavigationListItem text="Flight" icon="sap-icon://flight" />
-					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" />
-				</tnt:NavigationListGroup>
-				<tnt:NavigationListGroup text="Restricted" enabled="false">
-					<tnt:NavigationListItem text="Running" icon="sap-icon://physical-activity" />
-					<tnt:NavigationListItem text="Scissors" icon="sap-icon://scissors" />
-				</tnt:NavigationListGroup>
-				<tnt:NavigationListItem text="Transport" icon="sap-icon://passenger-train" />
-			</tnt:NavigationList>
-			<tnt:fixedItem>
-				<tnt:NavigationList>
-					<tnt:NavigationListItem text="Bar Chart" icon="sap-icon://bar-chart" />
-					<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_blank" text="External Link" icon="sap-icon://attachment" />
-					<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_top" text="External Link _top" icon="sap-icon://attachment" />
-					<tnt:NavigationListItem text="Compare" icon="sap-icon://compare" />
-				</tnt:NavigationList>
-			</tnt:fixedItem>
-		</tnt:SideNavigation>
+      <!-- Example additional content: a simple summary grid -->
+      <HBox renderType="Bare" justifyContent="SpaceAround">
+        <VBox class="dashboardItem">
+          <Title text="42" level="H3"/>
+          <Text text="Active Users"/>
         </VBox>
-        <VBox >
-        <!-- content -->
-		<Panel id="contentPanel" width="100%" height="100%">
-				<!-- Your dynamic content goes here -->
-		</Panel>
-        
+        <VBox class="dashboardItem">
+          <Title text="12" level="H3"/>
+          <Text text="Pending Tasks"/>
         </VBox>
-    </HBox>
-
-
-    </Page>
+        <VBox class="dashboardItem">
+          <Title text="7" level="H3"/>
+          <Text text="New Messages"/>
+        </VBox>
+      </HBox>
+  </Panel>
+</Page>
 </mvc:View>

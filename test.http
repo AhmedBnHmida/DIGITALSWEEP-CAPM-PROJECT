@@ -1,2 +1,3 @@
-GET http://localhost:4004/odata/v4/financeservice/MouthNumber
+// GET - Finance by ID (e.g., No = 1010)
+GET http://localhost:4004/odata/v4/financeservice/Finance(No=1013,IsActiveEntity=true)
 Accept: application/json

@@ -1,0 +1,73 @@
+<mvc:View
+  controllerName="customdgfiori.controller.CreateForm"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form">
+
+  <Page showHeader="false">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+      <form:SimpleForm layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" editable="true">
+
+        <Label text="No"/>
+        <Input id="inputNo" value="{/No}" placeholder="Enter unique number" required="true" liveChange=".onLiveChangeNo" />
+
+        <Label text="Segment"/>
+        <Input id="inputSegment" value="{/Segment}" placeholder="Enter segment" required="true" liveChange=".onLiveChangeSegment" />
+
+        <Label text="Country"/>
+        <Input id="inputCountry" value="{/Country}" placeholder="Enter country" required="true" liveChange=".onLiveChangeCountry" />
+
+        <Label text="Product"/>
+        <Input id="inputProduct" value="{/Product}" placeholder="Enter product name" required="true" liveChange=".onLiveChangeProduct" />
+
+        <Label text="Discount Band"/>
+        <Input id="inputDiscountBand" value="{/Discount_Band}" placeholder="Enter discount band" />
+
+        <Label text="Units Sold"/>
+        <Input id="inputUnitsSold" value="{/Units_Sold}" type="Number" placeholder="Enter units sold" liveChange=".onLiveChangeUnitsSold" />
+
+        <Label text="Manufacturing Price"/>
+        <Input id="inputManufacturingPrice" value="{/Manufacturing_Price}" type="Number" placeholder="Enter manufacturing price" liveChange=".onLiveChangeManufacturingPrice" />
+
+        <Label text="Sale Price"/>
+        <Input id="inputSalePrice" value="{/Sale_Price}" type="Number" placeholder="Enter sale price" liveChange=".onLiveChangeSalePrice" />
+
+        <Label text="Gross Sales"/>
+        <Input id="inputGrossSales" value="{/Gross_Sales}" type="Number" placeholder="Enter gross sales" liveChange=".onLiveChangeGrossSales" />
+
+        <Label text="Discounts"/>
+        <Input id="inputDiscounts" value="{/Discounts}" type="Number" placeholder="Enter discounts" liveChange=".onLiveChangeDiscounts" />
+
+        <Label text="Sales"/>
+        <Input id="inputSales" value="{/Sales}" type="Number" placeholder="Enter sales" liveChange=".onLiveChangeSales" />
+
+        <Label text="COGS"/>
+        <Input id="inputCOGS" value="{/COGS}" type="Number" placeholder="Enter COGS" liveChange=".onLiveChangeCOGS" />
+
+        <Label text="Profit"/>
+        <Input id="inputProfit" value="{/Profit}" type="Number" placeholder="Enter profit" liveChange=".onLiveChangeProfit" />
+
+        <Label text="Date"/>
+        <DatePicker
+          id="inputDate"
+          value="{path: '/Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+          displayFormat="yyyy-MM-dd"
+          />
+
+        <Label text="Month Number"/>
+        <Input id="inputMonthNumber" value="{/Month_Number}" type="Number" placeholder="Enter month number" liveChange=".onLiveChangeMonthNumber" />
+
+        <Label text="Month Name"/>
+        <Input id="inputMonthName" value="{/Month_Name}" placeholder="Enter month name" />
+
+        <Label text="Year"/>
+        <Input id="inputYear" value="{/Year}" type="Number" placeholder="Enter year" liveChange=".onLiveChangeYear" />
+
+      </form:SimpleForm>
+
+      <Button text="Create Record" type="Emphasized" press=".onSavePress" />
+
+    </Panel>
+  </Page>
+</mvc:View>

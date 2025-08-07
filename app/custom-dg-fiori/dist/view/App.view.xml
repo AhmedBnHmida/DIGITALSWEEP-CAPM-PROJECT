@@ -5,9 +5,9 @@
   xmlns:tnt="sap.tnt"
   xmlns:app="sap.m">
 
- <App id="app" height="100%">
-    <Page id="mainPage" showHeader="false" >
-     <VBox height="100%">
+  <App id="app">
+    <Page id="mainPage" showHeader="false">
+      <content>
         <!-- Tool Header -->
         <tnt:ToolHeader id="shellLikeToolHeader" class="sapUiTinyMargin">
 			<Button icon="sap-icon://menu2" type="Transparent" tooltip="Menu" press=".onCollapseExpandPress" >
@@ -68,60 +68,56 @@
 		</tnt:ToolHeader>
 
         <!-- Main Layout -->
-        <HBox height="100%" fitContainer="true" >
-
-			<!-- Sidebar -->
-			<tnt:SideNavigation id="sideNavigation" selectedKey="walked" expanded="false" >
+        <HBox>
+          <!-- Sidebar -->
+        <tnt:SideNavigation id="sideNavigation" selectedKey="walked" expanded="false">
+			<tnt:NavigationList>
+				<tnt:NavigationListItem text="Home" icon="sap-icon://home" press=".onHomePress" />
+				<tnt:NavigationListItem text="List" icon="sap-icon://list" press=".onListPress" />
+				<tnt:NavigationListItem text="Create" icon="sap-icon://add" press=".onCreatePress" />
+				<!--
+				<tnt:NavigationListGroup text="New">
+					<tnt:NavigationListItem text="People" icon="sap-icon://people-connected" />
+					<tnt:NavigationListItem text="Building" icon="sap-icon://building" >
+						<tnt:NavigationListItem text="Office 01" />
+						<tnt:NavigationListItem text="Office 02" />
+					</tnt:NavigationListItem>
+					<tnt:NavigationListItem text="Mileage" icon="sap-icon://mileage" >
+						<tnt:NavigationListItem text="Driven" />
+						<tnt:NavigationListItem text="Walked" id="walked" />
+					</tnt:NavigationListItem>
+				</tnt:NavigationListGroup>
+				<tnt:NavigationListGroup text="Recently used">
+					<tnt:NavigationListItem text="Managing My Area" icon="sap-icon://kpi-managing-my-area" />
+					<tnt:NavigationListItem text="Flight" icon="sap-icon://flight" />
+					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" />
+				</tnt:NavigationListGroup>
+				<tnt:NavigationListGroup text="Restricted" enabled="false">
+					<tnt:NavigationListItem text="Running" icon="sap-icon://physical-activity" />
+					<tnt:NavigationListItem text="Scissors" icon="sap-icon://scissors" />
+				</tnt:NavigationListGroup>
+				<tnt:NavigationListItem text="Transport" icon="sap-icon://passenger-train" />
+				 -->
+			</tnt:NavigationList>
+			<tnt:fixedItem>
 				<tnt:NavigationList>
-					<tnt:NavigationListItem text="Home" icon="sap-icon://home" press=".onHomePress" />
-					<tnt:NavigationListItem text="List" icon="sap-icon://list" press=".onListPress" />
-					<tnt:NavigationListItem text="Create" icon="sap-icon://add" press=".onCreatePress" />
-					<!--
-					<tnt:NavigationListGroup text="New">
-						<tnt:NavigationListItem text="People" icon="sap-icon://people-connected" />
-						<tnt:NavigationListItem text="Building" icon="sap-icon://building" >
-							<tnt:NavigationListItem text="Office 01" />
-							<tnt:NavigationListItem text="Office 02" />
-						</tnt:NavigationListItem>
-						<tnt:NavigationListItem text="Mileage" icon="sap-icon://mileage" >
-							<tnt:NavigationListItem text="Driven" />
-							<tnt:NavigationListItem text="Walked" id="walked" />
-						</tnt:NavigationListItem>
-					</tnt:NavigationListGroup>
-					<tnt:NavigationListGroup text="Recently used">
-						<tnt:NavigationListItem text="Managing My Area" icon="sap-icon://kpi-managing-my-area" />
-						<tnt:NavigationListItem text="Flight" icon="sap-icon://flight" />
-						<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" />
-					</tnt:NavigationListGroup>
-					<tnt:NavigationListGroup text="Restricted" enabled="false">
-						<tnt:NavigationListItem text="Running" icon="sap-icon://physical-activity" />
-						<tnt:NavigationListItem text="Scissors" icon="sap-icon://scissors" />
-					</tnt:NavigationListGroup>
-					<tnt:NavigationListItem text="Transport" icon="sap-icon://passenger-train" />
-					-->
+					<tnt:NavigationListItem text="Bar Chart" icon="sap-icon://bar-chart" />
+					<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_blank" text="External Link" icon="sap-icon://attachment" />
+					<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_top" text="External Link _top" icon="sap-icon://attachment" />
+					<tnt:NavigationListItem text="Compare" icon="sap-icon://compare" />
 				</tnt:NavigationList>
-				<tnt:fixedItem>
-					<tnt:NavigationList>
-						<tnt:NavigationListItem text="Bar Chart" icon="sap-icon://bar-chart" />
-						<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_blank" text="External Link" icon="sap-icon://attachment" />
-						<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_top" text="External Link _top" icon="sap-icon://attachment" />
-						<tnt:NavigationListItem text="Compare" icon="sap-icon://compare" />
-					</tnt:NavigationList>
-				</tnt:fixedItem>
-			</tnt:SideNavigation>
+			</tnt:fixedItem>
+		</tnt:SideNavigation>
 
-			<!-- Dynamic View Container -->
-			<app:NavContainer id="appContainer" >
-				<layoutData>
-					<FlexItemData growFactor="1"/>
-					<!-- Routing will inject views into this aggregation -->
-				</layoutData>
-			</app:NavContainer>	
-				
+          <!-- Dynamic View Container -->
+        <VBox id="contentBox" width="100%">
+        <app:NavContainer id="appContainer" />
+			<!-- Routing will inject views into this aggregation -->
+        </VBox>
 
-        </HBox>	
-		
-	 </VBox> 
- 	</Page>    
+
+        </HBox>
+      </content>
+    </Page>
   </App>
 </mvc:View>

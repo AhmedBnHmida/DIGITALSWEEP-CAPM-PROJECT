@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(o){"use strict";return o.extend("customdgfiori.controller.View1",{onInit:function(){console.log("*******************************************************************");console.log("ListReport loaded!");console.log("Dashboard view loaded");console.log("*******************************************************************")}})});
+//# sourceMappingURL=View1.controller.js.map

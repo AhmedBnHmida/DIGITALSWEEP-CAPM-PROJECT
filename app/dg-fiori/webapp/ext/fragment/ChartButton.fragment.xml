@@ -1,7 +1,0 @@
-<OverflowToolbarButton
-  xmlns="sap.m"
-  icon="sap-icon://business-objects-experience"
-  text="Go to Chart"
-  type="Transparent"
-  tooltip="Go to Chart View"
-  press=".onGoToChart" />

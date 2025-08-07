@@ -11,15 +11,15 @@ sap.ui.define([
       oSideNav.setExpanded(!oSideNav.getExpanded());
     },
 
-    onHomePress: function() {
+    onHomePress() {
       this.getOwnerComponent().getRouter().navTo("RouteView1");
     },
 
-    onListPress: function() {
+    onListPress() {
       this.getOwnerComponent().getRouter().navTo("ListReport");
     },
 
-    onCreatePress: function() {
+    onCreatePress() {
       this.getOwnerComponent().getRouter().navTo("CreateForm");
     }
   });

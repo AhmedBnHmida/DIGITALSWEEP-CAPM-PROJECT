@@ -7,6 +7,7 @@ sap.ui.define([
         onInit: function () {
             // Optional: any View1-specific logic
             console.log("*******************************************************************");
+            console.log("ListReport loaded!");
             console.log("Dashboard view loaded");
             console.log("*******************************************************************");
         }
