@@ -1,0 +1,10 @@
+<mvc:View
+  controllerName="customdgfiori.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <VBox class="sapUiContentPadding">
+    <Title text="Welcome to the Dashboard" level="H2"/>
+    <Text text="Select an option from the sidebar."/>
+  </VBox>
+</mvc:View>

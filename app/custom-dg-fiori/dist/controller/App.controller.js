@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("customdgfiori.controller.App",{onInit(){},onCollapseExpandPress(){const e=this.byId("sideNavigation");e.setExpanded(!e.getExpanded())},onHomePress(){this.getOwnerComponent().getRouter().navTo("RouteView1")},onListPress(){this.getOwnerComponent().getRouter().navTo("ListReport")},onCreatePress(){this.getOwnerComponent().getRouter().navTo("CreateForm")}})});
+//# sourceMappingURL=App.controller.js.map

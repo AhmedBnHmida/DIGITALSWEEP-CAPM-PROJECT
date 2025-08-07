@@ -3,7 +3,15 @@
   "sap.app": {
     "id": "customdgfiori",
     "type": "application",
-    "i18n": "i18n/i18n.properties",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        "",
+        "en",
+        "fr",
+        "fr-FR"
+      ]
+    },
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -59,7 +67,13 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "customdgfiori.i18n.i18n"
+          "bundleName": "customdgfiori.i18n.i18n",
+          "supportedLocales": [
+            "",
+            "en",
+            "fr",
+            "fr-FR"
+          ]
         }
       },
       "": {
@@ -86,6 +100,7 @@
         "controlAggregation": "pages",
         "transition": "slide",
         "viewType": "XML",
+        "viewPath": "customdgfiori.view",
         "async": true
       },
       "routes": [
@@ -98,38 +113,25 @@
           "name": "ListReport",
           "pattern": "list",
           "target": "ListReport"
-      },
-      {
+        },
+        {
           "name": "CreateForm",
           "pattern": "create",
           "target": "CreateForm"
-      },
-      {
-        "pattern": "EditForm/{id}",
-        "name": "EditForm",
-        "target": "EditForm"
-      },      
-      {
-        "pattern": "Detail/{id}",
-        "name": "Detail",
-        "target": "Detail"
-      }
+        }
       ],
       "targets": {
         "TargetView1": {
-          "viewName": "customdgfiori.view.View1"
+          "id": "View1",
+          "name": "View1"
         },
         "ListReport": {
-           "viewName": "customdgfiori.view.ListReport"  
+          "id": "ListReport",
+          "name": "ListReport"
         },
         "CreateForm": {
-          "viewName": "customdgfiori.view.CreateForm"
-        },
-        "Detail": {
-          "viewName": "customdgfiori.view.Detail"
-        },
-        "EditForm":{
-          "viewName": "customdgfiori.view.EditForm"
+          "id": "CreateForm",
+          "name": "CreateForm"
         }
       }
     },

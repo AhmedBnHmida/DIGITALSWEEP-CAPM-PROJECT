@@ -16,6 +16,7 @@ Accept: application/json
 // ======================================
 // POST - Add new Finance record
 POST http://localhost:4004/odata/v4/financeservice/Finance
+
 Content-Type: application/json
 {
   "No": 1010,
@@ -54,3 +55,25 @@ Content-Type: application/json
 // ======================================
 // DELETE - Remove record by ID
 DELETE http://localhost:4004/odata/v4/financeservice/Finance(No=1010)
+
+
+
+
+///////****************************************************////
+When you annotate your entity with @odata.draft.enabled in your service.cds file like this:
+entity Finance @odata.draft.enabled {
+  key No: Integer;
+  ...
+}
+
+CAP (Cloud Application Programming Model) automatically adds two hidden keys to manage draft versions of the entity:
+-IsActiveEntity (Boolean)
+-HasDraftEntity (Boolean, for views)
+-SiblingEntity (Association)
+
+And when you try to access the entity by key like:
+GET /odata/v4/financeservice/Finance(No=1)
+
+It's incomplete, because you also need to specify IsActiveEntity, like:
+GET /odata/v4/financeservice/Finance(No=1,IsActiveEntity=true)
+

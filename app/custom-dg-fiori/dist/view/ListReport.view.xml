@@ -3,10 +3,7 @@
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m">
 
-  
-<!--<Page title="Add New Record" showNavButton="true" navButtonPress=".onNavBack">-->
-<Page showHeader="false">
-    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+  <VBox class="sapUiContentPadding">
     <Button text="Create New Finance Entry" type="Emphasized" press=".onCreatePress"/>
     <Table
       id="financeTable"
@@ -26,7 +23,6 @@
         <Column><Text text="Sales"/></Column>
         <Column><Text text="Profit"/></Column>
         <Column><Text text="Date"/></Column>
-        <Column><Text text="Actions"/></Column> 
       </columns>
       <items>
         <ColumnListItem>
@@ -37,16 +33,9 @@
             <Text text="{Sales}"/>
             <Text text="{Profit}"/>
             <Text text="{path: 'Date', formatter: '.formatDate'}"/>
-            <HBox>
-              <Button icon="sap-icon://edit" press=".onEditPress" type="Transparent" tooltip="Edit"/>
-              <Button icon="sap-icon://delete" press=".onDeletePress" type="Transparent" tooltip="Delete"/>
-              <Button icon="sap-icon://inspect" press=".onDetailPress" type="Transparent" tooltip="Detail"/>
-            </HBox>
           </cells>
         </ColumnListItem>
       </items>
     </Table>
-  </Panel>
-  </Page>
-
+  </VBox>
 </mvc:View>

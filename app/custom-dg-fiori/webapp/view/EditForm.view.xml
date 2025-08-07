@@ -1,0 +1,67 @@
+<mvc:View
+  controllerName="customdgfiori.controller.EditForm"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+<!--<Page title="Add New Record" showNavButton="true" navButtonPress=".onNavBack">-->
+<Page showHeader="false">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+    
+        <Label text="Segment" labelFor="SegmentInput" />
+        <Input id="SegmentInput" value="{Segment}" />
+
+        <Label text="Country" labelFor="CountryInput" />
+        <Input id="CountryInput" value="{Country}" />
+
+        <Label text="Product" labelFor="ProductInput" />
+        <Input id="ProductInput" value="{Product}" />
+
+        <Label text="Discount Band" labelFor="DiscountBandInput" />
+        <Input id="DiscountBandInput" value="{Discount_Band}" />
+
+        <Label text="Units Sold" labelFor="UnitsSoldInput" />
+        <Input id="UnitsSoldInput" value="{Units_Sold}"  />
+
+        <Label text="Manufacturing Price" labelFor="ManufacturingPriceInput" />
+        <Input id="ManufacturingPriceInput" value="{Manufacturing_Price}" />
+
+        <Label text="Sale Price" labelFor="SalePriceInput" />
+        <Input id="SalePriceInput" value="{Sale_Price}"  />
+
+        <Label text="Gross Sales" labelFor="GrossSalesInput" />
+        <Input id="GrossSalesInput" value="{Gross_Sales}"  />
+
+        <Label text="Discounts" labelFor="DiscountsInput" />
+        <Input id="DiscountsInput" value="{Discounts}" />
+
+        <Label text="Sales" labelFor="SalesInput" />
+        <Input id="SalesInput" value="{Sales}"  />
+
+        <Label text="COGS" labelFor="COGSInput" />
+        <Input id="COGSInput" value="{COGS}"  />
+
+        <Label text="Profit" labelFor="ProfitInput" />
+        <Input id="ProfitInput" value="{Profit}"  />
+
+        <Label text="Date" labelFor="DatePicker" />
+        <DatePicker
+          id="DatePicker"
+          value="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy-MM-dd'}}"
+          displayFormat="yyyy-MM-dd"
+          placeholder="Select Date" />
+
+        <Label text="Month Number" labelFor="MonthNumberInput" />
+        <Input id="MonthNumberInput" value="{Month_Number}"/>
+
+        <Label text="Month Name" labelFor="MonthNameInput" />
+        <Input id="MonthNameInput" value="{Month_Name}" />
+
+        <Label text="Year" labelFor="YearInput" />
+        <Input id="YearInput" value="{Year}" />
+
+        <Button text="Save Changes" type="Emphasized" press=".onSavePress" class="sapUiSmallMarginTop" />
+
+    </Panel>
+</Page>
+
+</mvc:View>
