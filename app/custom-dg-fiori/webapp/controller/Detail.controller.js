@@ -15,7 +15,7 @@ sap.ui.define([
         const oModel = this.getView().getModel();
   
         // Bind the view to the selected entity
-        this.getView().bindElement("/Finance(No=" + sId + ",IsActiveEntity=true)");
+        this.getView().bindElement("/Finances(No=" + sId + ")");
       },
   
       onNavBack: function () {

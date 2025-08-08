@@ -1,48 +1,52 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-  ], function (Controller, MessageToast) {
-    "use strict";
-  
-    return Controller.extend("customdgfiori.controller.EditForm", {
-  
-      onInit: function () {
-        var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-        oRouter.getRoute("EditForm").attachPatternMatched(this._onObjectMatched, this);
-      },
-  
-      _onObjectMatched: function (oEvent) {
-        var sId = oEvent.getParameter("arguments").id;
-        var oModel = this.getView().getModel();
-  
-        // Bind the view to the Finance entity with key No=sId
-        this.getView().bindElement("/Finance(No=" + sId + ",IsActiveEntity=true)");
-      },
-  
-      onNavBack: function () {
-        var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-        oRouter.navTo("List");
-      },
-  
-      onSavePress: function () {
-        var oView = this.getView();
-        var oModel = oView.getModel();
-  
-        if (!oModel.hasPendingChanges()) {
-          MessageToast.show("No changes to save.");
-          return;
+  "sap/ui/core/mvc/Controller",
+  "sap/m/MessageBox"
+], function (Controller, MessageBox) {
+  "use strict";
+
+  return Controller.extend("customdgfiori.controller.EditForm", {
+
+    onInit: function () {
+      const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+      oRouter.getRoute("EditForm").attachPatternMatched(this._onObjectMatched, this);
+    },
+
+    _onObjectMatched: function (oEvent) {
+      const sId = oEvent.getParameter("arguments").id;
+      const sPath = `/Finances(No=${sId})`; // Update if key is string: `/Finances(No='${sId}')`
+      this.getView().bindElement({
+        path: sPath,
+        parameters: {
+          $$updateGroupId: "updateGroup"
         }
-  
-        // Submit batch changes (OData V4)
-        oModel.submitBatch().then(function () {
-          MessageToast.show("Changes saved successfully.");
-          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.navTo("List");
-        }.bind(this)).catch(function (err) {
-          MessageToast.show("Save failed: " + err.message);
-        });
+      });
+    },
+
+    onNavBack: function () {
+      sap.ui.core.UIComponent.getRouterFor(this).navTo("ListReport");
+    },
+
+    onSavePress: function () {
+      const oView = this.getView();
+      const oODataModel = oView.getModel();
+
+      if (!oView.getBindingContext().hasPendingChanges()) {
+        MessageBox.information("No changes to save.");
+        return;
       }
-  
-    });
+
+      oODataModel.submitBatch("updateGroup")
+        .then(() => {
+          MessageBox.success("Record updated successfully", {
+            onClose: () => {
+              this.onNavBack();
+            }
+          });
+        })
+        .catch((err) => {
+          MessageBox.error("Update failed: " + err.message);
+          console.error("Update Error", err);
+        });
+    }
   });
-  
+});
