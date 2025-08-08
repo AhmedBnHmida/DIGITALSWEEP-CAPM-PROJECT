@@ -26,13 +26,13 @@ sap.ui.define([
             // Navigate to the Create Form view
             this.getOwnerComponent().getRouter().navTo("CreateForm");
         },
-
+/*
         formatDate: function (sDate) {
             if (!sDate) return "";
             const oDate = new Date(sDate);
             return oDate.toLocaleDateString();
         },
-
+*/
 
 
 
@@ -74,22 +74,5 @@ sap.ui.define([
                 }
             );
         }
-        
-        
-        /*
-        onDeletePress: function (oEvent) {
-            const oCtx = oEvent.getSource().getBindingContext();
-            const oModel = this.getView().getModel();
-
-            oModel.remove(oCtx.getPath(), {
-                success: () => {
-                    sap.m.MessageToast.show("Entry deleted successfully");
-                },
-                error: (err) => {
-                    sap.m.MessageToast.show("Delete failed: " + err.message);
-                }
-            });
-        }
-        */
     });
 });

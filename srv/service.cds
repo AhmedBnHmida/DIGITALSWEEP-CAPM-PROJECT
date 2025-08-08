@@ -3,6 +3,9 @@ using {myFinance} from '/home/user/projects/DigitalSweepIntern/db/schema.cds';
 service Financeservice 
 {
 
+  // Entity for the custum application
+  entity Finances as projection on myFinance.Finance;
+
   // Draft-enabled entity for CRUD
   entity Finance @odata.draft.enabled as projection on myFinance.Finance;
 

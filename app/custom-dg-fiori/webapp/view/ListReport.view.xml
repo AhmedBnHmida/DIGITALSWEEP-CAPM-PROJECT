@@ -13,7 +13,7 @@
       growing="true"
       growingThreshold="20"
       headerText="Finance Records"
-      items="{ path: '/Finance' }">
+      items="{ path: '/Finances' }">
       <headerToolbar>
         <Toolbar>
           <Title text="Finance Data"/>
