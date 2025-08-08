@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/routing/History"
-], function (Controller, History) {
+    "sap/ui/core/routing/History",
+    "sap/m/MessageBox"
+], function (Controller, History, MessageBox) {
     "use strict";
 
     return Controller.extend("customdgfiori.controller.ListReport", {
@@ -51,6 +52,31 @@ sap.ui.define([
             oRouter.navTo("EditForm", { id: sId });
         },
 
+        onDeletePresss: function (oEvent) {
+            var oContext = oEvent.getSource().getBindingContext();
+            var RowId = oContext.getProperty("No");
+        
+            MessageBox.confirm(
+                "Are you sure you want to delete this Row with ID: " + RowId + "?",
+                {
+                    actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                    onClose: function (oAction) {
+                        if (oAction === MessageBox.Action.YES) {
+                            oContext.delete("$direct")
+                                .then(function () {
+                                    MessageBox.success("Row ID: " + RowId + " deleted successfully.");
+                                })
+                                .catch(function (oError) {
+                                    MessageBox.error("Error deleting Row ID: " + RowId + ". " + oError + " Please try again later.");
+                                });
+                        }
+                    }
+                }
+            );
+        }
+        
+        
+        /*
         onDeletePress: function (oEvent) {
             const oCtx = oEvent.getSource().getBindingContext();
             const oModel = this.getView().getModel();
@@ -64,5 +90,6 @@ sap.ui.define([
                 }
             });
         }
+        */
     });
 });

@@ -39,7 +39,7 @@
             <Text text="{path: 'Date', formatter: '.formatDate'}"/>
             <HBox>
               <Button icon="sap-icon://edit" press=".onEditPress" type="Transparent" tooltip="Edit"/>
-              <Button icon="sap-icon://delete" press=".onDeletePress" type="Transparent" tooltip="Delete"/>
+              <Button icon="sap-icon://delete" press="onDeletePresss" type="Transparent" tooltip="Delete"/>
               <Button icon="sap-icon://inspect" press=".onDetailPress" type="Transparent" tooltip="Detail"/>
             </HBox>
           </cells>
