@@ -76,6 +76,10 @@
 					<tnt:NavigationListItem text="Home" icon="sap-icon://home" press=".onHomePress" />
 					<tnt:NavigationListItem text="List" icon="sap-icon://list" press=".onListPress" />
 					<tnt:NavigationListItem text="Create" icon="sap-icon://add" press=".onCreatePress" />
+					<tnt:NavigationListItem text="View Chart" icon="sap-icon://pie-chart" press=".onChartPress"/>
+					<tnt:NavigationListItem text="View Chart Default" icon="sap-icon://bar-chart" press=".onChartDefaultPress"/>
+
+
 					<!--
 					<tnt:NavigationListGroup text="New">
 						<tnt:NavigationListItem text="People" icon="sap-icon://people-connected" />
