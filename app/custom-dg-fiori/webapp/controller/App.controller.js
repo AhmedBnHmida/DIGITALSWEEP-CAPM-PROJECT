@@ -21,6 +21,12 @@ sap.ui.define([
 
     onCreatePress: function() {
       this.getOwnerComponent().getRouter().navTo("CreateForm");
+    },
+    onChartPress: function() {
+        this.getOwnerComponent().getRouter().navTo("Chart");
+    },
+    onChartDefaultPress: function() {
+        this.getOwnerComponent().getRouter().navTo("ChartDefault");
     }
   });
 });

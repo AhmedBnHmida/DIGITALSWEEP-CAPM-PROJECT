@@ -1,0 +1,59 @@
+<mvc:View
+  controllerName="customdgfiori.controller.ChartDefault"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:vizdata="sap.viz.ui5.data"
+  xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
+  height="100%">
+
+  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+      <!-- Horizontal Box to place charts side by side -->
+      <HBox fitContainer="true" justifyContent="Center" alignItems="Start" renderType="Bare">
+        
+        <!-- Profit by Segment Chart -->
+        <VBox width="50%" fitContainer="true" class="sapUiTinyMarginEnd">
+          <viz:VizFrame id="idProfitVizFrame" uiConfig="{applicationSet:'fiori'}" vizType="column" height="600px" width="100%">
+            <viz:dataset>
+              <vizdata:FlattenedDataset data="{/Finances}">
+                <vizdata:dimensions>
+                  <vizdata:DimensionDefinition name="Segment" value="{Segment}"/>
+                </vizdata:dimensions>
+                <vizdata:measures>
+                  <vizdata:MeasureDefinition name="Profit" value="{Profit}"/>
+                </vizdata:measures>
+              </vizdata:FlattenedDataset>
+            </viz:dataset>
+            <viz:feeds>
+              <vizFeeds:FeedItem uid="valueAxis" type="Measure" values="Profit"/>
+              <vizFeeds:FeedItem uid="categoryAxis" type="Dimension" values="Segment"/>
+            </viz:feeds>
+          </viz:VizFrame>
+        </VBox>
+
+        <!-- Sales by Segment Chart -->
+        <VBox width="50%" fitContainer="true" class="sapUiTinyMarginBegin">
+          <viz:VizFrame id="idSalesVizFrame" uiConfig="{applicationSet:'fiori'}" vizType="column" height="600px" width="100%">
+            <viz:dataset>
+              <vizdata:FlattenedDataset data="{/Finances}">
+                <vizdata:dimensions>
+                  <vizdata:DimensionDefinition name="Segment" value="{Segment}"/>
+                </vizdata:dimensions>
+                <vizdata:measures>
+                  <vizdata:MeasureDefinition name="Sales" value="{Sales}"/>
+                </vizdata:measures>
+              </vizdata:FlattenedDataset>
+            </viz:dataset>
+            <viz:feeds>
+              <vizFeeds:FeedItem uid="valueAxis" type="Measure" values="Sales"/>
+              <vizFeeds:FeedItem uid="categoryAxis" type="Dimension" values="Segment"/>
+            </viz:feeds>
+          </viz:VizFrame>
+        </VBox>
+
+      </HBox>
+    </Panel>
+  </Page>
+
+</mvc:View>
