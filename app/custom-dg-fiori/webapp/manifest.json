@@ -126,6 +126,11 @@
         "pattern": "ChartDefault",
         "name": "ChartDefault",
         "target": "ChartDefault"
+      },
+      {
+        "name": "Map",
+        "pattern": "map",
+        "target": "Map"
       }
       ],
       "targets": {
@@ -149,6 +154,10 @@
         },
         "ChartDefault": {
           "viewName": "customdgfiori.view.ChartDefault"
+        },
+        "Map": {
+          "viewName": "customdgfiori.view.Map",
+          "viewType": "XML"
         }
       }
     },
