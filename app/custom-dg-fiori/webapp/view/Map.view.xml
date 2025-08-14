@@ -1,0 +1,19 @@
+<mvc:View
+  controllerName="customdgfiori.controller.Map"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:vbm="sap.ui.vbm"
+  height="100%">
+
+  <Page title="Map View" showNavButton="true" navButtonPress=".onNavBack">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+
+        <vbm:GeoMap
+        id="geoMap"
+        width="100%"
+        height="500px" 
+        />
+
+    </Panel>
+  </Page>
+</mvc:View>

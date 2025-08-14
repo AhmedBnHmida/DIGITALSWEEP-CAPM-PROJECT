@@ -78,6 +78,7 @@
 					<tnt:NavigationListItem text="Create" icon="sap-icon://add" press=".onCreatePress" />
 					<tnt:NavigationListItem text="View Chart" icon="sap-icon://pie-chart" press=".onChartPress"/>
 					<tnt:NavigationListItem text="View Chart Default" icon="sap-icon://bar-chart" press=".onChartDefaultPress"/>
+					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" press=".onMapPress" />
 
 
 					<!--

@@ -27,6 +27,9 @@ sap.ui.define([
     },
     onChartDefaultPress: function() {
         this.getOwnerComponent().getRouter().navTo("ChartDefault");
+    },
+    onMapPress: function () {
+      this.getOwnerComponent().getRouter().navTo("Map");
     }
   });
 });
