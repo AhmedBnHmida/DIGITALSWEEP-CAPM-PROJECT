@@ -1,28 +1,85 @@
 <mvc:View
   controllerName="customdgfiori.controller.View1"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m">
+  xmlns="sap.m"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
 
-<!--<Page title="Add New Record" showNavButton="true" navButtonPress=".onNavBack">-->
-<Page showHeader="false">
-  <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
-    <Title text="Welcome to the Dashboard" level="H2"/>
+  <Page showHeader="false">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
 
-      <!-- Example additional content: a simple summary grid -->
-      <HBox renderType="Bare" justifyContent="SpaceAround">
-        <VBox class="dashboardItem">
-          <Title text="42" level="H3"/>
-          <Text text="Active Users"/>
+      <Title text="Welcome to the Dashboard" level="H2" class="dashboardTitle"/>
+
+      <!-- Summary Numbers -->
+      <HBox justifyContent="SpaceAround" width="100%">
+        <VBox class="dashboardItem" width="20%">
+          <Title text="Country Count" level="H3"/>
+          <Text text="{/countryCount}" class="summaryValue"/>
         </VBox>
-        <VBox class="dashboardItem">
-          <Title text="12" level="H3"/>
-          <Text text="Pending Tasks"/>
+        <VBox class="dashboardItem" width="20%">
+          <Title text="Segment Count" level="H3"/>
+          <Text text="{/segmentCount}" class="summaryValue"/>
         </VBox>
-        <VBox class="dashboardItem">
-          <Title text="7" level="H3"/>
-          <Text text="New Messages"/>
+        <VBox class="dashboardItem" width="20%">
+          <Title text="Total Units Sold" level="H3"/>
+          <Text text="{/totalUnitsSold}" class="summaryValue"/>
+        </VBox>
+        <VBox class="dashboardItem" width="20%">
+          <Title text="Global Profit" level="H3"/>
+          <Text text="{/globalProfit}" class="summaryValue"/>
         </VBox>
       </HBox>
-  </Panel>
-</Page>
+
+
+      <!-- Table: Finances by Country -->
+      <Table id="countryTable" items="{/financesByCountry}" width="100%">
+        <headerToolbar>
+          <Toolbar>
+            <Title text="Country Sales Summary" level="H3" />
+          </Toolbar>
+        </headerToolbar>
+        <columns>
+          <Column>
+            <Text text="Country" class="tableHeaderText"/>
+          </Column>
+          <Column>
+            <Text text="Total Sales" class="tableHeaderText"/>
+          </Column>
+          <Column>
+            <Text text="Profit" class="tableHeaderText"/>
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{Country}"/>
+              <Text text="{Sales}" class="tableCellSales"/>
+              <Text text="{Profit}" class="tableCellProfit"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+
+
+      <!-- Chart: Profit by Year -->
+      <viz:VizFrame width="100%" height="350px" vizType="column" uiConfig="{applicationSet:'fiori'}" id="profitViz">
+        <viz:dataset>
+          <viz.data:FlattenedDataset data="{/profitByYear}">
+            <viz.data:dimensions>
+              <viz.data:DimensionDefinition name="Year" value="{Year}"/>
+            </viz.data:dimensions>
+            <viz.data:measures>
+              <viz.data:MeasureDefinition name="Profit" value="{Profit}"/>
+            </viz.data:measures>
+          </viz.data:FlattenedDataset>
+        </viz:dataset>
+        <viz:feeds>
+          <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Profit"/>
+          <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Year"/>
+        </viz:feeds>
+      </viz:VizFrame>
+
+    </Panel>
+  </Page>
 </mvc:View>
