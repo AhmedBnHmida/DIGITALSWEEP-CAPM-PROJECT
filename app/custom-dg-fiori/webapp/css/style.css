@@ -1,1 +1,41 @@
 /* Enter your custom styles here */
+
+.dashboardTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #5dade2; /* Light blue */
+  margin-bottom: 20px;
+  text-align: center;
+  display: block;
+}
+
+
+
+.dashboardItem {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #f4f6f7;
+  margin: 5px;
+  text-align: center;
+}
+
+.summaryValue {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #2c3e50; /* Dark blue-gray */
+}
+
+.tableHeaderText {
+  font-weight: bold;
+  color: #34495e; /* Slightly darker */
+}
+
+.tableCellSales {
+  color: #2980b9; /* Blue for sales */
+  font-weight: 600;
+}
+
+.tableCellProfit {
+  color: #27ae60; /* Green for profit */
+  font-weight: 600;
+}
