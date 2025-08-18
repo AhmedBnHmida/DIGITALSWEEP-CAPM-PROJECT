@@ -1,19 +1,39 @@
 <mvc:View
   controllerName="customdgfiori.controller.Map"
-  xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core"
   xmlns:vbm="sap.ui.vbm"
-  height="100%">
-
-  <Page title="Map View" showNavButton="true" navButtonPress=".onNavBack">
+  height="100%"
+  displayBlock="true">
+  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack">
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
-
-        <vbm:GeoMap
-        id="geoMap"
+      <vbm:GeoMap
+        id="vbi"
         width="100%"
-        height="500px" 
-        />
-
+        height="600px"
+        initialZoom="3"
+        initialPosition="0;20;0"
+        legendVisible="true">
+        <vbm:vos>
+          <vbm:Circles
+            items="{/circlesData}"
+            select=".onCircleSelect">
+            <vbm:Circle
+              position="{position}"
+              tooltip="{tooltip}"
+              radius="{radius}"
+              color="rgba(92,186,230,0.6)"
+              colorBorder="rgb(255,255,255)"
+              hotDeltaColor="rgba(92,186,230,0.8)" />
+          </vbm:Circles>
+        </vbm:vos>
+        <vbm:legend>
+          <vbm:Legend caption="Legend">
+            <vbm:LegendItem text="Sales Count (circle radius)" color="rgba(92,186,230,0.6)" />
+          </vbm:Legend>
+        </vbm:legend>
+      </vbm:GeoMap>
     </Panel>
   </Page>
 </mvc:View>

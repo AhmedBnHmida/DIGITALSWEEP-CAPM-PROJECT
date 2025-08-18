@@ -51,7 +51,8 @@
         "sap.ui.core": {},
         "sap.ui.comp": {},
         "sap.ui.layout": {},
-        "sap.viz": {}
+        "sap.viz": {},
+        "sap.ui.vbm": {}
       }
     },
     "contentDensities": {
