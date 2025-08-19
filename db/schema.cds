@@ -46,7 +46,8 @@ entity Finance  {
     Date:Date;
     Month_Number:Integer;
     Month_Name:String; 	
-    Year:Integer
+    Year:Integer;
+    ExchangeRateToEUR : Decimal;
 }
 
 entity  MouthNumber {

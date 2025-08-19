@@ -30,6 +30,10 @@ sap.ui.define([
     },
     onMapPress: function () {
       this.getOwnerComponent().getRouter().navTo("Map");
+    },
+    onWeatherPress: function() {
+      this.getOwnerComponent().getRouter().navTo("weather");
     }
+
   });
 });

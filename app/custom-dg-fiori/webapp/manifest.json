@@ -132,6 +132,11 @@
         "name": "Map",
         "pattern": "map",
         "target": "Map"
+      },
+      {
+        "name": "weather",
+        "pattern": "weather",
+        "target": "weather"
       }
       ],
       "targets": {
@@ -159,6 +164,10 @@
         "Map": {
           "viewName": "customdgfiori.view.Map",
           "viewType": "XML"
+        },
+        "weather": {
+          "viewName": "customdgfiori.view.Weather",
+          "title": "Weather Info"
         }
       }
     },
