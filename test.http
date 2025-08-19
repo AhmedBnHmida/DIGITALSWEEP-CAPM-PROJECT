@@ -1,2 +1,10 @@
-GET http://localhost:4004/odata/v4/financeservice/Finances
+
+### Test getWeather action by latitude and longitude
+POST http://localhost:4004/odata/v4/Financeservice/getWeather
+Content-Type: application/json
 Accept: application/json
+
+{
+  "lat": 48.1351,
+  "lon": 11.5820
+}

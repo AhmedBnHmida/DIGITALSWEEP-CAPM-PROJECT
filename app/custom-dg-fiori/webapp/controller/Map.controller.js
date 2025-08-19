@@ -72,7 +72,7 @@ sap.ui.define([
         MessageToast.show(sTooltip);
       }
     },
-
+/*
     onCountryChange: function (oEvent) {
       var sSelected = oEvent.getParameter("selectedItem").getKey();
       if (!sSelected) return;
@@ -93,7 +93,7 @@ sap.ui.define([
       var pos = this._countryCoordinates[sSelected] || "0;0;0";
       this.byId("vbi").zoomToGeoPosition(pos, 5);
     },
-
+*/
     onAfterRendering: function () {
       var oGeoMap = this.byId("vbi");
 

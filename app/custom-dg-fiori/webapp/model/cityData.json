@@ -1,0 +1,47 @@
+{
+  "cities": [
+    { "name": "Istanbul, Turkey", "lat": 41.0082, "lon": 28.9784 },
+    { "name": "Ankara, Turkey", "lat": 39.9208, "lon": 32.8541 },
+    { "name": "Izmir, Turkey", "lat": 38.4192, "lon": 27.1287 },
+
+    { "name": "London, UK", "lat": 51.5074, "lon": -0.1278 },
+    { "name": "Manchester, UK", "lat": 53.4808, "lon": -2.2426 },
+    { "name": "Birmingham, UK", "lat": 52.4862, "lon": -1.8904 },
+
+    { "name": "Berlin, Germany", "lat": 52.5200, "lon": 13.4050 },
+    { "name": "Munich, Germany", "lat": 48.1351, "lon": 11.5820 },
+    { "name": "Hamburg, Germany", "lat": 53.5511, "lon": 9.9937 },
+
+    { "name": "Paris, France", "lat": 48.8566, "lon": 2.3522 },
+    { "name": "Marseille, France", "lat": 43.2965, "lon": 5.3698 },
+    { "name": "Lyon, France", "lat": 45.7640, "lon": 4.8357 },
+
+    { "name": "Rome, Italy", "lat": 41.9028, "lon": 12.4964 },
+    { "name": "Milan, Italy", "lat": 45.4642, "lon": 9.1900 },
+    { "name": "Naples, Italy", "lat": 40.8518, "lon": 14.2681 },
+
+    { "name": "Washington D.C., USA", "lat": 38.9072, "lon": -77.0369 },
+    { "name": "New York, USA", "lat": 40.7128, "lon": -74.0060 },
+    { "name": "Los Angeles, USA", "lat": 34.0522, "lon": -118.2437 },
+    { "name": "Chicago, USA", "lat": 41.8781, "lon": -87.6298 },
+    { "name": "Houston, USA", "lat": 29.7604, "lon": -95.3698 },
+
+    { "name": "Tokyo, Japan", "lat": 35.6762, "lon": 139.6503 },
+    { "name": "Osaka, Japan", "lat": 34.6937, "lon": 135.5023 },
+    { "name": "Kyoto, Japan", "lat": 35.0116, "lon": 135.7681 },
+
+    { "name": "Beijing, China", "lat": 39.9042, "lon": 116.4074 },
+    { "name": "Shanghai, China", "lat": 31.2304, "lon": 121.4737 },
+    { "name": "Guangzhou, China", "lat": 23.1291, "lon": 113.2644 },
+    { "name": "Shenzhen, China", "lat": 22.5431, "lon": 114.0579 },
+
+    { "name": "New Delhi, India", "lat": 28.6139, "lon": 77.2090 },
+    { "name": "Mumbai, India", "lat": 19.0760, "lon": 72.8777 },
+    { "name": "Bangalore, India", "lat": 12.9716, "lon": 77.5946 },
+    { "name": "Chennai, India", "lat": 13.0827, "lon": 80.2707 },
+
+    { "name": "Tunis, Tunisia", "lat": 36.8065, "lon": 10.1815 },
+    { "name": "Sfax, Tunisia", "lat": 34.7406, "lon": 10.7603 },
+    { "name": "Sousse, Tunisia", "lat": 35.8256, "lon": 10.6084 }
+  ]
+}
