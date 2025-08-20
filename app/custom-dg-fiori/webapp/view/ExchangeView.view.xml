@@ -1,0 +1,35 @@
+<mvc:View
+  controllerName="customdgfiori.controller.ExchangeView"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Page showHeader="false">
+    <Panel headerText="Currency Exchange Rate" width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" >
+      <VBox class="sapUiSmallMargin" width="100%">
+        
+        <Label text="Base Currency" labelFor="baseSelect" tooltip="Select the currency you want to convert from" />
+        <Select id="baseSelect" items="{/Currencies}" width="100%" change=".onBaseCurrencyChange">
+          <core:Item key="{code}" text="{code}" />
+        </Select>
+
+        <Label text="Target Currency" labelFor="targetSelect" tooltip="Select the currency you want to convert to" class="sapUiSmallMarginTop" />
+        <Select id="targetSelect" items="{/Currencies}" width="100%" change=".onTargetCurrencyChange">
+          <core:Item key="{code}" text="{code}" />
+        </Select>
+
+        <Button 
+          text="Get Exchange Rate" 
+          press=".onGetExchangeRate" 
+          class="sapUiSmallMarginTop" 
+          type="Emphasized" 
+          width="100%" />
+
+        <Text id="exchangeRateText" wrapping="true" class="sapUiSmallMarginTop sapUiMediumMarginTop" />
+
+        <BusyIndicator id="busyIndicator" visible="false" class="sapUiMediumMarginTop" />
+
+      </VBox>
+    </Panel>
+  </Page>
+</mvc:View>

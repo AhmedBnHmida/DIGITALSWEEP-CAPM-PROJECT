@@ -6,13 +6,14 @@
   displayBlock="true"
 >
   <VBox class="sapUiMediumMargin sapUiResponsiveContentPadding" alignItems="Center">
+    <!-- City Selection ComboBox -->
     <HBox class="sapUiSmallMarginBottom" alignItems="Center">
-      <Label text="Şehir Seçin:" labelFor="IDComboCitySelect" />
+      <Label text="Select City:" labelFor="IDComboCitySelect" />
       <ComboBox
         id="IDComboCitySelect"
         items="{/cities}"
         selectionChange=".onCityChange"
-        placeholder="Şehir seçin"
+        placeholder="Choose a city"
         width="220px"
         editable="true"
       >
@@ -20,6 +21,7 @@
       </ComboBox>
     </HBox>
 
+    <!-- Weather Data Table -->
     <Table
       id="IDTableCurrentWeather"
       items="{weatherModel>/Forecast}"
@@ -31,17 +33,17 @@
     >
       <headerToolbar>
         <Toolbar>
-          <Title text="📡 Hava Durumu Tahmini" level="H2" />
+          <Title text="📡 Weather Forecast" level="H2" />
         </Toolbar>
       </headerToolbar>
 
       <columns>
-        <Column><Text text="📅 Tarih Saat" /></Column>
-        <Column><Text text="🌡 Sıcaklık (°C)" /></Column>
-        <Column><Text text="🤒 Hissedilen (°C)" /></Column>
-        <Column><Text text="🌤 Hava Durumu" /></Column>
-        <Column><Text text="💧 Nem (%)" /></Column>
-        <Column><Text text="🌬 Rüzgar (m/s)" /></Column>
+        <Column><Text text="📅 Date Time" /></Column>
+        <Column><Text text="🌡 Temperature (°C)" /></Column>
+        <Column><Text text="🤒 Feels Like (°C)" /></Column>
+        <Column><Text text="🌤 Condition" /></Column>
+        <Column><Text text="💧 Humidity (%)" /></Column>
+        <Column><Text text="🌬 Wind (m/s)" /></Column>
       </columns>
 
       <items>
@@ -57,5 +59,21 @@
         </ColumnListItem>
       </items>
     </Table>
+
+    <!-- Custom Weather Icon and Description below the table -->
+    <VBox class="sapUiSmallMarginTop" alignItems="Center">
+      <Image
+        id="weatherIcon"
+        width="80px"
+        height="80px"
+        src="{= 'https://openweathermap.org/img/wn/' + ${weatherModel>/Forecast/0/weather_icon} + '@2x.png'}"
+        alt="Current Weather Icon"
+      />
+      <Text
+        text="{weatherModel>/Forecast/0/weather_desc}"
+        class="sapMTextCenter"
+        wrapping="false"
+      />
+    </VBox>
   </VBox>
 </mvc:View>

@@ -1,10 +1,10 @@
 
-### Test getWeather action by latitude and longitude
-POST http://localhost:4004/odata/v4/Financeservice/getWeather
+### Test getExchangeRate action
+POST http://localhost:4004/odata/v4/Financeservice/getExchangeRate
 Content-Type: application/json
 Accept: application/json
 
 {
-  "lat": 48.1351,
-  "lon": 11.5820
+  "base": "USD",
+  "target": "EUR"
 }

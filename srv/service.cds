@@ -28,6 +28,14 @@ service Financeservice {
 
   // New action for weather
   //action getWeather(lat: Decimal, lon: Decimal) returns WeatherResponse;
+  action getWeather(lat: Double, lon: Double) returns {
+    dt_txt      : String;
+    temp        : Decimal(9,2);
+    feels_like  : Decimal(9,2);
+    humidity    : Integer;
+    wind_speed  : Decimal(9,2);
+    weather_desc: String;
+  };
 
 
   // Draft-enabled entity for CRUD

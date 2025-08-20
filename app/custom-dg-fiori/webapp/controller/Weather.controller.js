@@ -9,6 +9,7 @@ sap.ui.define([
     formatter: formatter,
 
     onInit: function () {
+      // Load city data from JSON file
       const oCityModel = new JSONModel();
       oCityModel.loadData("model/cityData.json");
       this.getView().setModel(oCityModel);
@@ -16,7 +17,8 @@ sap.ui.define([
       oCityModel.attachRequestCompleted(() => {
         const aCities = oCityModel.getData().cities;
         if (aCities?.length > 0) {
-          this.loadCurrentWeather(aCities[0].lat, aCities[0].lon);
+          // Load weather for the first city by default
+          this.loadCurrentWeather(aCities[0].lat, aCities.lon);
         }
       });
     },
@@ -28,11 +30,12 @@ sap.ui.define([
     },
 
     loadCurrentWeather: async function (lat, lon) {
-      const apiKey = "1cddf9a813c095031459c988a73af6fc";
+      const apiKey = "1cddf9a813c095031459c988a73af6fc"; // Your OpenWeatherMap API key
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=en`;
       try {
         const response = await fetch(url);
         const data = await response.json();
+
         const row = {
           dt_txt: new Date(data.dt * 1000).toLocaleString("en-US"),
           temp: data.main.temp,
@@ -40,12 +43,14 @@ sap.ui.define([
           humidity: data.main.humidity,
           wind_speed: data.wind.speed,
           weather_desc: data.weather?.[0]?.description || "",
+          weather_icon: data.weather?.[0]?.icon || ""
         };
+
         const oWeatherModel = new JSONModel({ Forecast: [row] });
         this.getView().setModel(oWeatherModel, "weatherModel");
       } catch (err) {
         console.error("Could not fetch current weather:", err);
       }
-    },
+    }
   });
 });
