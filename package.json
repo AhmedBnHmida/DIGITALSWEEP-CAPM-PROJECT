@@ -7,6 +7,8 @@
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^2",
+    "@openui5/sap.m": "^1.139.0",
+    "@openui5/sap.ui.core": "^1.139.0",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",
     "axios": "^1.11.0",

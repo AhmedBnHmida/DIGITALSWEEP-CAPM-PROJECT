@@ -58,6 +58,28 @@ DELETE http://localhost:4004/odata/v4/financeservice/Finance(No=1010)
 
 
 
+// ======================================
+### Test getWeather action by latitude and longitude
+POST http://localhost:4004/odata/v4/Financeservice/getWeather
+Content-Type: application/json
+Accept: application/json
+
+{
+  "lat": 48.1351,
+  "lon": 11.5820
+}
+
+
+// ======================================
+### Test getExchangeRate action
+POST http://localhost:4004/odata/v4/Financeservice/getExchangeRate
+Content-Type: application/json
+Accept: application/json
+
+{
+  "base": "USD",
+  "target": "EUR"
+}
 
 ///////****************************************************////
 When you annotate your entity with @odata.draft.enabled in your service.cds file like this:

@@ -33,7 +33,12 @@ sap.ui.define([
     },
     onWeatherPress: function() {
       this.getOwnerComponent().getRouter().navTo("weather");
+    },
+    onExchangePress: function() {
+      this.getOwnerComponent().getRouter().navTo("exchange");
     }
+
+
 
   });
 });

@@ -137,6 +137,11 @@
         "name": "weather",
         "pattern": "weather",
         "target": "weather"
+      },
+      {
+        "name": "exchange",
+        "pattern": "exchange",
+        "target": "exchange"
       }
       ],
       "targets": {
@@ -168,6 +173,9 @@
         "weather": {
           "viewName": "customdgfiori.view.Weather",
           "title": "Weather Info"
+        },
+        "exchange": {
+          "viewName": "customdgfiori.view.ExchangeView"
         }
       }
     },

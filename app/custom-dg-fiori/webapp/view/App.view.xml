@@ -80,6 +80,8 @@
 					<tnt:NavigationListItem text="View Chart Default" icon="sap-icon://bar-chart" press=".onChartDefaultPress"/>
 					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" press=".onMapPress" />
 					<tnt:NavigationListItem text="Weather" icon="sap-icon://cloud" press=".onWeatherPress" />
+					<tnt:NavigationListItem text="Exchange Rate" icon="sap-icon://money-bills" press=".onExchangePress" />
+
 
 
 
