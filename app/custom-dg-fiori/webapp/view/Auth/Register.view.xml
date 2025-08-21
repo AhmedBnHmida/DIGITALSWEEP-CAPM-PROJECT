@@ -1,0 +1,57 @@
+<mvc:View
+    controllerName="customdgfiori.controller.Auth.Register"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page>
+        <!-- HEADER centered -->
+        <customHeader>
+            <Bar>
+                <!-- Left: Logo and Title -->
+                <contentLeft>
+                    <HBox alignItems="Center"  class="sapUiTinyMargin">
+                        <Image src="img/logo.png" width="40px" height="40px" alt="App Logo"/>
+                        <Title text="MyApp - Register" level="H2" class="sapUiTinyMarginBegin"/>
+                    </HBox>
+                </contentLeft>
+
+                <!-- Middle: Navigation buttons -->
+                <contentMiddle>
+                    <HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMargin">
+                        <Button text="Home" type="Transparent" press=".onHomePress"/>
+                        <Button text="About Us" type="Transparent" press=".onAboutPress"/>
+                    </HBox>
+                </contentMiddle>
+
+                <!-- RIGHT: Login/Register -->
+                <contentRight>
+                    <HBox alignItems="Center" class="sapUiTinyMargin">
+                        <Button text="Login" type="Emphasized" press=".onLoginPress"/>
+                        <Button text="Register" type="Transparent" press=".onRegisterPress"/>
+                    </HBox>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <!-- PAGE CONTENT -->
+        <content>
+            <VBox class="sapUiMediumMargin" renderType="Bare" justifyContent="Center" alignItems="Center">
+                <Input id="inputUsername" placeholder="Username" width="250px"/>
+                <Input id="inputEmail" type="Email" placeholder="Email" width="250px"/>
+                <Input id="inputPassword" type="Password" placeholder="Password" width="250px"/>
+                <Input id="inputConfirmPassword" type="Password" placeholder="Confirm Password" width="250px"/>
+                <Button text="Register" press=".onRegisterPress" type="Emphasized"/>
+                <Button text="Back to Login" type="Transparent" press=".onLoginPress" />
+            </VBox>
+        </content>
+
+        <!-- FOOTER centered -->
+        <footer>
+            <Bar>
+                <contentMiddle>
+                    <Text text="© 2025 MyApp. All rights reserved."/>
+                </contentMiddle>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

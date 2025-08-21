@@ -94,6 +94,16 @@
       },
       "routes": [
         {
+          "name": "login",
+          "pattern": "",
+          "target": "login"
+        },
+        {
+          "name": "register",
+          "pattern": "register",
+          "target": "register"
+        },
+        {
           "name": "RouteView1",
           "pattern": ":?query:",
           "target": "TargetView1"
@@ -145,6 +155,12 @@
       }
       ],
       "targets": {
+        "login": {
+          "viewName": "customdgfiori.view.Auth.Login"
+        },
+        "register": {
+          "viewName": "customdgfiori.view.Auth.Register"
+        },
         "TargetView1": {
           "viewName": "customdgfiori.view.View1"
         },

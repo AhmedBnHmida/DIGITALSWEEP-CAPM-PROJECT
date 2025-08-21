@@ -35,10 +35,22 @@ sap.ui.define([
         return;
       }
 
-      const apiKey = "49f46424a282b4ce4c4258a860412e9d";
-      const url = `https://api.exchangerate.host/live?access_key=${apiKey}&base=${sBase}&symbols=${sTarget}`;
+     // const apiKey = "49f46424a282b4ce4c4258a860412e9d";
+     // const url = `https://api.exchangerate.host/live?access_key=${apiKey}&base=${sBase}&symbols=${sTarget}`;
 
-      fetch(url)
+      const url = "/odata/v4/Financeservice/getExchangeRate";
+
+      fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          },
+          body: JSON.stringify({
+              base: sBase,
+              target: sTarget
+          })
+        })
         .then(response => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
