@@ -1,8 +1,8 @@
 
 ### Test getExchangeRate action
-POST http://localhost:4004/odata/v4/Financeservice/getExchangeRate
-Content-Type: application/json
-Accept: application/json
+POST http://localhost:4004/odatContent-Type: application/json
+Accept: application/jsona/v4/Financeservice/getExchangeRate
+
 
 {
   "base": "USD",
