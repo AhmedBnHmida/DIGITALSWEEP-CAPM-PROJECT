@@ -81,6 +81,38 @@ Accept: application/json
   "target": "EUR"
 }
 
+
+
+
+### Register a new user
+POST http://localhost:4004/odata/v4/auth/register
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "123456"
+}
+
+### Login with existing user
+POST http://localhost:4004/odata/v4/auth/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "123456"
+}
+
+### Try login with wrong password
+POST http://localhost:4004/odata/v4/auth/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "wrongpassword"
+}
+
+
 ///////****************************************************////
 When you annotate your entity with @odata.draft.enabled in your service.cds file like this:
 entity Finance @odata.draft.enabled {

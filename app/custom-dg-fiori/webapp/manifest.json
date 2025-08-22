@@ -23,6 +23,13 @@
           "annotations": [],
           "odataVersion": "4.0"
         }
+      },
+      "authService": {
+        "uri": "/auth/",      
+        "type": "OData",     
+        "settings": {
+          "odataVersion": "4.0"
+        }
       }
     }
   },
@@ -74,6 +81,15 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "authService": {
+        "dataSource": "authService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       }
     },
     "resources": {
@@ -95,7 +111,7 @@
       "routes": [
         {
           "name": "login",
-          "pattern": "",
+          "pattern": "login",
           "target": "login"
         },
         {
