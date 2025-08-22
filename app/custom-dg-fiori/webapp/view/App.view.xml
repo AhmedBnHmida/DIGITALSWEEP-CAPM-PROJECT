@@ -60,7 +60,11 @@
 			</Button>
 			<tnt:ToolHeaderUtilitySeparator/>
 			<OverflowToolbarButton icon="sap-icon://grid" type="Transparent" text="My Products" tooltip="My Products"/>
-			<Avatar src="test-resources/sap/tnt/images/Woman_avatar_01.png" displaySize="XS" press=".onAvatarPressed" tooltip="Profile">
+			<Avatar 
+				src="test-resources/sap/tnt/images/Woman_avatar_01.png" 
+				displaySize="XS" 
+				press=".onAvatarPress" 
+				tooltip="Profile">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="NeverOverflow"/>
 				</layoutData>

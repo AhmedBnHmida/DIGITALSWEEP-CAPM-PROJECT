@@ -6,7 +6,7 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("customdgfiori.controller.Auth.Login", {
-        
+
         onLoginPress: function() {
             const oView = this.getView();
             const username = oView.byId("inputUsernamel").getValue();
@@ -17,24 +17,33 @@ sap.ui.define([
                 return;
             }
 
-            // Simple dummy login validation example:
-            if (username === "user" && password === "user") {
-                MessageToast.show("Login successful!");
+            const url = "/odata/v4/auth/login";
 
-                // Navigate to main app or home page
-                //const oRouter = UIComponent.getRouterFor(this);
-                //oRouter.navTo("RouteView1");
-                this.getOwnerComponent().getRouter().navTo("RouteView1");
-                MessageToast.show("Navigating to RouteView1");
-            } else {
-                MessageToast.show("Invalid username or password.");
-            }
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.error.message || "Login failed"); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                MessageToast.show(data.message || "Login successful!");
+                UIComponent.getRouterFor(this).navTo("RouteView1");
+            })
+            .catch(err => {
+                MessageToast.show(err.message);
+            });
         },
-        
+
         onRegisterPress: function() {
-            // Navigate to register page
-            const oRouter = UIComponent.getRouterFor(this);
-            oRouter.navTo("register");
+            UIComponent.getRouterFor(this).navTo("register");
         }
     });
 });

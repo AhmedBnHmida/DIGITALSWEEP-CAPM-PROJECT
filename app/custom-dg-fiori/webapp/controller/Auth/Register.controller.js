@@ -24,20 +24,33 @@ sap.ui.define([
                 return;
             }
 
-            // Here you would call your backend registration service 
-            // For demo, just show success message
+            const url = "/odata/v4/auth/register";
 
-            MessageToast.show("Registration successful! Please login.");
-
-            // Navigate back to login page
-            const oRouter = UIComponent.getRouterFor(this);
-            oRouter.navTo("login");
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({ username, email, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.error.message || "Registration failed"); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                MessageToast.show(data.message || "Registration successful!");
+                UIComponent.getRouterFor(this).navTo("login");
+            })
+            .catch(err => {
+                MessageToast.show(err.message);
+            });
         },
 
         onLoginPress: function() {
-            // Navigate back to login page
-            const oRouter = UIComponent.getRouterFor(this);
-            oRouter.navTo("login");
+            UIComponent.getRouterFor(this).navTo("login");
         }
     });
 });

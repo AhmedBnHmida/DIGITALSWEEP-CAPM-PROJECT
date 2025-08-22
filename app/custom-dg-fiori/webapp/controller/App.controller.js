@@ -63,8 +63,44 @@ sap.ui.define([
     },
     onExchangePress: function() {
       this.getOwnerComponent().getRouter().navTo("exchange");
-    }
+    },
 
+    onAvatarPress: function (oEvent) {
+      const oButton = oEvent.getSource();
+
+      // Create menu lazily (only once)
+      if (!this._oAvatarMenu) {
+          this._oAvatarMenu = new sap.m.Menu({
+              items: [
+                  new sap.m.MenuItem({
+                      text: "Settings",
+                      icon: "sap-icon://action-settings",
+                      press: function () {
+                          sap.m.MessageToast.show("Settings clicked");
+                      }
+                  }),
+                  new sap.m.MenuItem({
+                      text: "Logout",
+                      icon: "sap-icon://log",
+                      press: function () {
+                          sap.m.MessageToast.show("Logout clicked");
+                          // logout logic
+                          this.getOwnerComponent().getRouter().navTo("login");
+                          // Example logout flow
+                          /*
+                          sessionStorage.clear();
+                          localStorage.clear();
+                          this.getOwnerComponent().getRouter().navTo("login");
+                          */
+                      }.bind(this)
+                  })
+              ]
+          });
+      }
+
+      // Open menu relative to Avatar
+      this._oAvatarMenu.openBy(oButton);
+    }
 
 
   });
