@@ -1,0 +1,30 @@
+<mvc:View
+    controllerName="customdgfiori.controller.EditProfile"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form">
+
+    <Page title="Edit Profile" showHeader="false">
+        <Panel width="auto" class="sapUiResponsiveMargin">
+            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+
+                <Label text="Username"/>
+                <Input id="usernameInput"/>
+
+                <Label text="Email"/>
+                <Text id="emailText"/>
+
+                <Label text="New Password"/>
+                <Input type="Password" id="passwordField"/>
+
+                <Label text="Confirm Password"/>
+                <Input type="Password" id="confirmPasswordField"/>
+
+                <Label text="Created At"/>
+                <Text id="createdAtText"/>
+
+                <Button text="Save" type="Emphasized" press=".onSave"/>
+            </form:SimpleForm>
+        </Panel>
+    </Page>
+</mvc:View>

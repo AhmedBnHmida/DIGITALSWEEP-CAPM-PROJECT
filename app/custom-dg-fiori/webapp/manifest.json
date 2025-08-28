@@ -106,9 +106,17 @@
         "controlAggregation": "pages",
         "transition": "slide",
         "viewType": "XML",
-        "async": true
+        "async": true,
+        "bypassed": {
+            "target": "home"
+        }
       },
       "routes": [
+        {
+            "name": "home",
+            "pattern": "",
+            "target": "home"
+        },
         {
           "name": "login",
           "pattern": "login",
@@ -121,7 +129,7 @@
         },
         {
           "name": "RouteView1",
-          "pattern": ":?query:",
+          "pattern": "view1",
           "target": "TargetView1"
         },
         {
@@ -168,9 +176,17 @@
         "name": "exchange",
         "pattern": "exchange",
         "target": "exchange"
+      },
+      {
+        "pattern": "editProfile",
+        "name": "editProfile",
+        "target": "editProfile"
       }
       ],
       "targets": {
+        "home": {
+            "viewName": "customdgfiori.view.Home"
+        },
         "login": {
           "viewName": "customdgfiori.view.Auth.Login"
         },
@@ -208,6 +224,9 @@
         },
         "exchange": {
           "viewName": "customdgfiori.view.ExchangeView"
+        },
+        "editProfile": {
+          "viewName": "customdgfiori.view.EditProfile"
         }
       }
     },
