@@ -9,7 +9,7 @@
   <Page showHeader="false">
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
 
-      <Title text="Welcome to the Dashboard" level="H2" class="dashboardTitle"/>
+      <!-- <Title text="Welcome to the Dashboard" level="H2" class="dashboardTitle"/>-->
 
       <!-- Summary Numbers -->
       <HBox justifyContent="SpaceAround" width="100%">

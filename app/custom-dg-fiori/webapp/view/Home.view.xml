@@ -12,7 +12,7 @@
                 <!-- Left: Logo and Title -->
                 <contentLeft>
                     <HBox alignItems="Center"  class="sapUiTinyMargin">
-                        <Image src="images/finance.png" width="40px" height="40px" alt="App Logo"/>
+                      <!--   <Image src="images/fina1.png" width="40px" height="40px" alt="App Logo"/>-->
                         <Title text="Finance App" level="H2" class="sapUiTinyMarginBegin"/>
                     </HBox>
                 </contentLeft>
