@@ -64,6 +64,9 @@ sap.ui.define([
     onExchangePress: function() {
       this.getOwnerComponent().getRouter().navTo("exchange");
     },
+    oneditProfilePress: function() {
+      this.getOwnerComponent().getRouter().navTo("editProfile");
+    },
 
     onAvatarPress: function (oEvent) {
       const oButton = oEvent.getSource();

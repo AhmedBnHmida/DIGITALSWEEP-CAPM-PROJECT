@@ -15,51 +15,61 @@
 					<OverflowToolbarLayoutData priority="NeverOverflow"/>
 				</layoutData>
 			</Button>
-			<Image src="test-resources/sap/tnt/images/SAP_Logo.png" decorative="false" press="onLogoPressed" tooltip="SAP Logo" width="60px" height="30px">
+			<!-- 
+			<Image src="images/fina1.png" decorative="false" press="onLogoPressed" tooltip="SAP Logo" width="60px" height="30px">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="NeverOverflow"/>
 				</layoutData>
 			</Image>
-			<Title text="Prоduct Name" wrapping="false" id="productName">
+			-->
+			<Title text="Finance App" wrapping="false" id="productName">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="Disappear"/>
 				</layoutData>
 			</Title>
+			<!--
 			<Text text="Second title" wrapping="false" id="secondTitle">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="Disappear"/>
 				</layoutData>
 			</Text>
+			-->
 			<ToolbarSpacer />
+			
 			<SearchField width="25rem" id="searchField">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="Low" group="1"/>
 				</layoutData>
 			</SearchField>
 			<Button visible="false" icon="sap-icon://search" type="Transparent" id="searchButton" tooltip="Search"/>
+			<!--
 			<OverflowToolbarButton icon="sap-icon://da" type="Transparent" tooltip="Joule" text="Joule">
 				<layoutData>
 					<OverflowToolbarLayoutData group="2"/>
 				</layoutData>
 			</OverflowToolbarButton>
+
 			<OverflowToolbarButton icon="sap-icon://source-code" type="Transparent" tooltip="Action 1" text="Action 1">
 				<layoutData>
 					<OverflowToolbarLayoutData group="2"/>
 				</layoutData>
 			</OverflowToolbarButton>
+
 			<OverflowToolbarButton icon="sap-icon://card" type="Transparent" tooltip="Action 2" text="Action 2">
 				<layoutData>
 					<OverflowToolbarLayoutData group="2"/>
 				</layoutData>
 			</OverflowToolbarButton>
-			<OverflowToolbarButton icon="sap-icon://action-settings" type="Transparent" text="Settings"/>
+			-->
+			<OverflowToolbarButton icon="sap-icon://action-settings" type="Transparent" text="Settings" press=".oneditProfilePress"/>
 			<Button icon="sap-icon://bell" type="Transparent" tooltip="Notification">
 				<layoutData>
 					<OverflowToolbarLayoutData priority="NeverOverflow"/>
 				</layoutData>
 			</Button>
 			<tnt:ToolHeaderUtilitySeparator/>
-			<OverflowToolbarButton icon="sap-icon://grid" type="Transparent" text="My Products" tooltip="My Products"/>
+			<!--<OverflowToolbarButton icon="sap-icon://grid" type="Transparent" text="My Products" tooltip="My Products" press=".onMyProductsPress"/>-->
+			
 			<Avatar 
 				src="test-resources/sap/tnt/images/Woman_avatar_01.png" 
 				displaySize="XS" 
@@ -83,8 +93,7 @@
 					<tnt:NavigationListItem text="View Chart" icon="sap-icon://pie-chart" press=".onChartPress"/>
 					<tnt:NavigationListItem text="View Chart Default" icon="sap-icon://bar-chart" press=".onChartDefaultPress"/>
 					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" press=".onMapPress" />
-					<tnt:NavigationListItem text="Weather" icon="sap-icon://cloud" press=".onWeatherPress" />
-					<tnt:NavigationListItem text="Exchange Rate" icon="sap-icon://money-bills" press=".onExchangePress" />
+					
 
 
 
@@ -115,11 +124,17 @@
 				</tnt:NavigationList>
 				<tnt:fixedItem>
 					<tnt:NavigationList>
+						<tnt:NavigationListItem text="Weather" icon="sap-icon://cloud" press=".onWeatherPress" />
+						<tnt:NavigationListItem text="Exchange Rate" icon="sap-icon://money-bills" press=".onExchangePress" />
+					</tnt:NavigationList>
+					<!--
+					<tnt:NavigationList>
 						<tnt:NavigationListItem text="Bar Chart" icon="sap-icon://bar-chart" />
 						<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_blank" text="External Link" icon="sap-icon://attachment" />
 						<tnt:NavigationListItem selectable="false" href="https://sap.com" target="_top" text="External Link _top" icon="sap-icon://attachment" />
 						<tnt:NavigationListItem text="Compare" icon="sap-icon://compare" />
 					</tnt:NavigationList>
+					-->
 				</tnt:fixedItem>
 			</tnt:SideNavigation>
 
