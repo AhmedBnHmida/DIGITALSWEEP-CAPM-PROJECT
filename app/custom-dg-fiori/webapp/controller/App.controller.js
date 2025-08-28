@@ -16,7 +16,7 @@ sap.ui.define([
       const oView = this.getView();
 
       // Views where you want to hide header and sidebar
-      const aNoHeaderViews = ["login", "register"];
+      const aNoHeaderViews = ["login", "register","home"];
 
       const bHide = aNoHeaderViews.includes(sRouteName);
 
@@ -76,22 +76,23 @@ sap.ui.define([
                       text: "Settings",
                       icon: "sap-icon://action-settings",
                       press: function () {
-                          sap.m.MessageToast.show("Settings clicked");
-                      }
+                          //sap.m.MessageToast.show("Settings clicked");
+                          this.getOwnerComponent().getRouter().navTo("editProfile");
+                      }.bind(this)
                   }),
                   new sap.m.MenuItem({
                       text: "Logout",
                       icon: "sap-icon://log",
                       press: function () {
-                          sap.m.MessageToast.show("Logout clicked");
+                          // logout
+                          //sap.m.MessageToast.show("Logout clicked");
+                          //this.getOwnerComponent().getRouter().navTo("login");
+
                           // logout logic
-                          this.getOwnerComponent().getRouter().navTo("login");
-                          // Example logout flow
-                          /*
                           sessionStorage.clear();
                           localStorage.clear();
                           this.getOwnerComponent().getRouter().navTo("login");
-                          */
+                          
                       }.bind(this)
                   })
               ]

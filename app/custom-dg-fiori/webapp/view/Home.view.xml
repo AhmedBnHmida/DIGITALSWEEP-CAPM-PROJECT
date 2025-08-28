@@ -1,16 +1,18 @@
 <mvc:View
-    controllerName="customdgfiori.controller.Auth.Register"
+    controllerName="customdgfiori.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
 
-    <Page>
+    <Page title="Welcome to MyApp">
+
+
         <!-- HEADER centered -->
         <customHeader>
             <Bar>
                 <!-- Left: Logo and Title -->
                 <contentLeft>
                     <HBox alignItems="Center"  class="sapUiTinyMargin">
-                        <Image src="img/logo.png" width="40px" height="40px" alt="App Logo"/>
+                        <Image src="images/finance.png" width="40px" height="40px" alt="App Logo"/>
                         <Title text="Finance App" level="H2" class="sapUiTinyMarginBegin"/>
                     </HBox>
                 </contentLeft>
@@ -32,16 +34,12 @@
             </Bar>
         </customHeader>
 
-        <!-- PAGE CONTENT -->
+
         <content>
-            <VBox class="sapUiMediumMargin" renderType="Bare" justifyContent="Center" alignItems="Center">
-                <Input id="inputUsername" placeholder="Username" width="250px"/>
-                <Input id="inputEmail" type="Email" placeholder="Email" width="250px"/>
-                <Input id="inputPassword" type="Password" placeholder="Password" width="250px"/>
-                <Input id="inputConfirmPassword" type="Password" placeholder="Confirm Password" width="250px"/>
-                <Button text="Register" press=".onRegisterPress" type="Emphasized"/>
-                <Button text="Cancel" type="Transparent" press=".onCancelPress" />
-                <!--<Button text="Back to Login" type="Transparent" press=".onLoginPress" />-->
+            <VBox class="sapUiSmallMargin" justifyContent="Center" alignItems="Center">
+                <Text text="Welcome to the Fianace App!" class="sapUiLargeMarginBottom"/>
+               <!-- <Button text="Go to Login" press=".onLoginPress" type="Emphasized"/>
+                <Button text="Go to Register" press=".onRegisterPress" type="Transparent"/>-->
             </VBox>
         </content>
 

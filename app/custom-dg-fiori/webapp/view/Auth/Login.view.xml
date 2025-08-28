@@ -11,7 +11,7 @@
                 <contentLeft>
                     <HBox alignItems="Center"  class="sapUiTinyMargin">
                         <Image src="img/logo.png" width="40px" height="40px" alt="App Logo"/>
-                        <Title text="MyApp - Register" level="H2" class="sapUiTinyMarginBegin"/>
+                        <Title text="Finance App" level="H2" class="sapUiTinyMarginBegin"/>
                     </HBox>
                 </contentLeft>
 
@@ -19,7 +19,6 @@
                 <contentMiddle>
                     <HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMargin">
                         <Button text="Home" type="Transparent" press=".onHomePress"/>
-                        <Button text="About Us" type="Transparent" press=".onAboutPress"/>
                     </HBox>
                 </contentMiddle>
 
@@ -36,10 +35,11 @@
         <!-- PAGE CONTENT -->
         <content>
             <VBox class="sapUiMediumMargin" renderType="Bare" justifyContent="Center" alignItems="Center">
-                <Input id="inputUsernamel" placeholder="Username" width="250px"/>
+                <Input id="inputEmaill" placeholder="Email" width="250px"/>
                 <Input id="inputPasswordl" type="Password" placeholder="Password" width="250px"/>
                 <Button text="Login" press=".onLoginPress" type="Emphasized"/>
-                <Button text="Register" type="Transparent" press=".onRegisterPress" />
+                <Button text="Cancel" type="Transparent" press=".onCancelPress" />
+                <!--<Button text="Register" type="Transparent" press=".onRegisterPress" />-->
             </VBox>
         </content>
 
@@ -47,7 +47,7 @@
         <footer>
             <Bar>
                 <contentMiddle>
-                    <Text text="© 2025 MyApp. All rights reserved."/>
+                    <Text text="© 2025 Finance App. All rights reserved."/>
                 </contentMiddle>
             </Bar>
         </footer>

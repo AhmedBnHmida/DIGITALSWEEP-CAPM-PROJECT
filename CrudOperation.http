@@ -113,6 +113,30 @@ Content-Type: application/json
 }
 
 
+###Get all users GET 
+http://localhost:4004/odata/v4/auth/Users
+Accept: application/json
+
+
+### Get user by ID
+GET http://localhost:4004/odata/v4/auth/Users/7682876c-d4d8-40a9-a9ed-d38e530b562d
+Accept: application/json
+
+
+### Edit user Profile
+POST http://localhost:4004/odata/v4/auth/updateUser
+Content-Type: application/json
+
+{
+  "ID": "7682876c-d4d8-40a9-a9ed-d38e530b562d",
+  "username": "ryhab",
+  "password": "ryhab123"
+}
+
+
+
+
+
 ///////****************************************************////
 When you annotate your entity with @odata.draft.enabled in your service.cds file like this:
 entity Finance @odata.draft.enabled {

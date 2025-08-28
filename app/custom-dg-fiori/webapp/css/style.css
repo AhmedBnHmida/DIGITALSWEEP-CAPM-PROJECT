@@ -39,3 +39,84 @@
   color: #27ae60; /* Green for profit */
   font-weight: 600;
 }
+
+
+
+/**************************************** LOGIN PAGE ****************************************/
+.customBackground {
+  background-image: url('../images/back1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  font-family: '72', '72full', Arial, sans-serif; /* SAP Fiori font family for consistency */
+}
+
+/* Center the VBox and stretch it neatly */
+.centeredBox {
+  background: rgba(255, 255, 255, 0.92);
+  width: 400px;
+  margin: 100px auto 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.centeredBox:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+.navButtons .sapMBtn {
+  margin-right: 16px;
+  font-weight: 600;
+}
+
+.buttonBar {
+  margin-top: 24px;
+}
+
+.buttonBar .sapMBtn {
+  margin-left: 16px;
+}
+
+/* Input field styling */
+.sapMInputBaseInner {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+  width: 250px;
+}
+
+.sapMInputBaseInner:focus {
+  border-color: #007cc0; /* SAP Blue focus */
+  box-shadow: 0 0 5px rgba(0,124,192,0.5);
+  outline: none;
+}
+
+/* Header bar adjustments */
+.customHeader .sapMBBar {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  padding: 8px 24px;
+  font-weight: 600;
+}
+
+/* Footer bar adjustments */
+footer .sapMBBar {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #555;
+}
+/**************************************** ****************************************/
