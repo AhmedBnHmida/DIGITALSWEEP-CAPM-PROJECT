@@ -3,7 +3,7 @@ sap.ui.define([
   ], function (Controller) {
     "use strict";
   
-    return Controller.extend("customdgfiori.controller.Detail", {
+    return Controller.extend("customdgfiori.controller.Pages.Detail", {
   
       onInit: function () {
         var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

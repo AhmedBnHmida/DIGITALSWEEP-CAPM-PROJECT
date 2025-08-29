@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (Controller, MessageToast, JSONModel, NumberFormat) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.View1", {
+  return Controller.extend("customdgfiori.controller.Pages.View1", {
 
     onInit: function () {
       this._loadData();

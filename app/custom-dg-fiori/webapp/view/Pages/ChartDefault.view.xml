@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="customdgfiori.controller.ChartDefault"
+  controllerName="customdgfiori.controller.Pages.ChartDefault"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:viz="sap.viz.ui5.controls"

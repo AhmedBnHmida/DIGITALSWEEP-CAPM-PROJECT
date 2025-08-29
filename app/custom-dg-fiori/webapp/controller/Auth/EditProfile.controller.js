@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, MessageToast, UIComponent) {
     "use strict";
 
-    return Controller.extend("customdgfiori.controller.EditProfile", {
+    return Controller.extend("customdgfiori.controller.Auth.EditProfile", {
 
         onInit: function () {
             this.userId = localStorage.getItem("userId") || sessionStorage.getItem("userId");

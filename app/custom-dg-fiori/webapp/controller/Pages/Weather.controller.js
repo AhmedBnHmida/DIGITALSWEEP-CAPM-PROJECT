@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, JSONModel, formatter) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.Weather", {
+  return Controller.extend("customdgfiori.controller.Pages.Weather", {
     formatter: formatter,
 
     onInit: function () {
