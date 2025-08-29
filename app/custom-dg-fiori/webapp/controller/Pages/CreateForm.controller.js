@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, MessageBox, JSONModel) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.CreateForm", {
+  return Controller.extend("customdgfiori.controller.Pages.CreateForm", {
 
     onInit: function () {
       const oFormModel = new JSONModel({

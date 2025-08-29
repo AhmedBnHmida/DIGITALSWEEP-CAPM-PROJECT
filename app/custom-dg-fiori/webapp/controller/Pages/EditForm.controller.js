@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (Controller, MessageBox) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.EditForm", {
+  return Controller.extend("customdgfiori.controller.Pages.EditForm", {
 
     onInit: function () {
       const oRouter = sap.ui.core.UIComponent.getRouterFor(this);

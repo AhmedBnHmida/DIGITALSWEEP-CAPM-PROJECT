@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="customdgfiori.controller.ExchangeView"
+  controllerName="customdgfiori.controller.Pages.ExchangeView"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:core="sap.ui.core">

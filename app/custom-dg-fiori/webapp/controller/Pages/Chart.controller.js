@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Controller) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.Chart", {
+  return Controller.extend("customdgfiori.controller.Pages.Chart", {
 
     onAfterRendering: function() {
       var oVizFrame = this.byId("idPieChart");

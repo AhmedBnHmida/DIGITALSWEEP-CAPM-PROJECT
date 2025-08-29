@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, JSONModel, MessageToast) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.Map", {
+  return Controller.extend("customdgfiori.controller.Pages.Map", {
 
     onInit: function () {
       // Fixed coordinates for countries (longitude;latitude;0)

@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, History, MessageBox) {
     "use strict";
 
-    return Controller.extend("customdgfiori.controller.ListReport", {
+    return Controller.extend("customdgfiori.controller.Pages.ListReport", {
 
         onInit: function () {
             // You can add initialization logic here

@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="customdgfiori.controller.EditProfile"
+    controllerName="customdgfiori.controller.Auth.EditProfile"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:form="sap.ui.layout.form">

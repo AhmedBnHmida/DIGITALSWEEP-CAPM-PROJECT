@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="customdgfiori.controller.ListReport"
+  controllerName="customdgfiori.controller.Pages.ListReport"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m">
 

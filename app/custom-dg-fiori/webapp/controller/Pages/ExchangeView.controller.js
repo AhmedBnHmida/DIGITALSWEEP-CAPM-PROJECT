@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, MessageToast, JSONModel) {
   "use strict";
 
-  return Controller.extend("customdgfiori.controller.ExchangeView", {
+  return Controller.extend("customdgfiori.controller.Pages.ExchangeView", {
 
     onInit: function() {
       // Sample list of currencies - extend as needed

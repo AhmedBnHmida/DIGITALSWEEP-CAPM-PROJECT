@@ -185,7 +185,7 @@
       ],
       "targets": {
         "home": {
-            "viewName": "customdgfiori.view.Home"
+            "viewName": "customdgfiori.view.Auth.Home"
         },
         "login": {
           "viewName": "customdgfiori.view.Auth.Login"
@@ -193,40 +193,40 @@
         "register": {
           "viewName": "customdgfiori.view.Auth.Register"
         },
+        "editProfile": {
+          "viewName": "customdgfiori.view.Auth.EditProfile"
+        },
         "TargetView1": {
-          "viewName": "customdgfiori.view.View1"
+          "viewName": "customdgfiori.view.Pages.View1"
         },
         "ListReport": {
-           "viewName": "customdgfiori.view.ListReport"  
+           "viewName": "customdgfiori.view.Pages.ListReport"  
         },
         "CreateForm": {
-          "viewName": "customdgfiori.view.CreateForm"
+          "viewName": "customdgfiori.view.Pages.CreateForm"
         },
         "Detail": {
-          "viewName": "customdgfiori.view.Detail"
+          "viewName": "customdgfiori.view.Pages.Detail"
         },
         "EditForm":{
-          "viewName": "customdgfiori.view.EditForm"
+          "viewName": "customdgfiori.view.Pages.EditForm"
         },
         "Chart": {
-          "viewName": "customdgfiori.view.Chart"
+          "viewName": "customdgfiori.view.Pages.Chart"
         },
         "ChartDefault": {
-          "viewName": "customdgfiori.view.ChartDefault"
+          "viewName": "customdgfiori.view.Pages.ChartDefault"
         },
         "Map": {
-          "viewName": "customdgfiori.view.Map",
+          "viewName": "customdgfiori.view.Pages.Map",
           "viewType": "XML"
         },
         "weather": {
-          "viewName": "customdgfiori.view.Weather",
+          "viewName": "customdgfiori.view.Pages.Weather",
           "title": "Weather Info"
         },
         "exchange": {
-          "viewName": "customdgfiori.view.ExchangeView"
-        },
-        "editProfile": {
-          "viewName": "customdgfiori.view.EditProfile"
+          "viewName": "customdgfiori.view.Pages.ExchangeView"
         }
       }
     },
