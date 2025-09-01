@@ -61,3 +61,22 @@ entity  Segments {
     key SegmentName:String;
 
 }
+
+
+
+
+entity InvoiceStatus {
+    key Status : String; // values: Pending, Approved, Rejected, Paid
+}
+
+entity Invoices {
+    key InvoiceID      : UUID;
+    CustomerName       : String(100);
+    Country            : String(50);
+    Amount             : Decimal(15,2);
+    Currency           : String;
+    Status             : String;  
+    IssueDate          : Date;
+    DueDate            : Date;
+    RelatedSegment     : String;
+}

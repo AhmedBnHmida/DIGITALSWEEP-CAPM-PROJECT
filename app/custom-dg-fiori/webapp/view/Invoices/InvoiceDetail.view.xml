@@ -1,0 +1,68 @@
+<mvc:View
+    controllerName="customdgfiori.controller.Invoices.InvoiceDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page title="Invoice Detail" showNavButton="true" navButtonPress=".onNavBack">
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <VBox class="sapUiSmallMargin" width="650px" renderType="Bare">
+
+                <!-- Row 1 -->
+                <FlexBox wrap="Wrap" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom" width="100%">
+                    <VBox width="30%">
+                        <Label text="Invoice ID" />
+                        <Text text="{InvoiceID}" />
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Customer Name" />
+                        <Text text="{CustomerName}" />
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Country" />
+                        <Text text="{Country}" />
+                    </VBox>
+                </FlexBox>
+
+                <!-- Row 2 -->
+                <FlexBox wrap="Wrap" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom" width="100%">
+                    <VBox width="30%">
+                        <Label text="Amount" />
+                        <Text text="{Amount}" />
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Currency" />
+                        <Text text="{Currency}" />
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Status" />
+                        <ObjectStatus 
+                            text="{Status}"
+                            state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : ${Status} === 'Rejected' ? 'Error' : 'None' }" />
+                    </VBox>
+                </FlexBox>
+
+                <!-- Row 3 -->
+                <FlexBox wrap="Wrap" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom" width="100%">
+                    <VBox width="30%">
+                        <Label text="Issue Date" />
+                        <Text text="{path: 'IssueDate', formatter: '.formatDate'}"/>
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Due Date" />
+                        <Text text="{path: 'DueDate', formatter: '.formatDate'}"/>
+                    </VBox>
+                    <VBox width="30%">
+                        <Label text="Segment" />
+                        <Text text="{RelatedSegment}" />
+                    </VBox>
+                </FlexBox>
+
+                <HBox class="sapUiSmallMarginTop" justifyContent="Start">
+                    <Button text="Edit" type="Accept" press=".onEdit" />
+                </HBox>
+
+            </VBox>
+        </Panel>
+    </Page>
+</mvc:View>

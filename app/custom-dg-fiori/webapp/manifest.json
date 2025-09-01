@@ -181,6 +181,26 @@
         "pattern": "editProfile",
         "name": "editProfile",
         "target": "editProfile"
+      },
+      {
+        "name": "CreateInvoice",
+        "pattern": "createInvoice",
+        "target": "CreateInvoice"
+      },
+      {
+        "name": "ListInvoice",
+        "pattern": "listInvoice",
+        "target": "ListInvoice"
+      },
+      {
+        "name": "InvoiceDetail",
+        "pattern": "invoiceDetail/{id}",
+        "target": "InvoiceDetail"
+      },
+      {
+        "name": "EditInvoice", 
+        "pattern": "editInvoice/{id}", 
+        "target": "EditInvoice"
       }
       ],
       "targets": {
@@ -227,7 +247,11 @@
         },
         "exchange": {
           "viewName": "customdgfiori.view.Pages.ExchangeView"
-        }
+        },
+        "CreateInvoice": { "viewName": "customdgfiori.view.Invoices.CreateInvoice" },
+        "EditInvoice": { "viewName": "customdgfiori.view.Invoices.EditInvoice" },
+        "InvoiceDetail": { "viewName": "customdgfiori.view.Invoices.InvoiceDetail" },
+        "ListInvoice": { "viewName": "customdgfiori.view.Invoices.ListInvoice" }
       }
     },
     "rootView": {

@@ -93,6 +93,14 @@
 					<tnt:NavigationListItem text="View Chart" icon="sap-icon://pie-chart" press=".onChartPress"/>
 					<tnt:NavigationListItem text="View Chart Default" icon="sap-icon://bar-chart" press=".onChartDefaultPress"/>
 					<tnt:NavigationListItem text="Map" icon="sap-icon://map-2" press=".onMapPress" />
+
+					<!-- Invoices Dropdown -->
+					<tnt:NavigationListGroup text="Invoices">
+						<tnt:NavigationListItem text="Create Invoice" icon="sap-icon://add-document" press=".onCreateInvoicePress"/>
+						<tnt:NavigationListItem text="List Invoices" icon="sap-icon://list" press=".onListInvoicePress"/>
+						<!--<tnt:NavigationListItem text="Invoice Details" icon="sap-icon://detail-view" press=".onInvoiceDetailPress"/>-->
+					</tnt:NavigationListGroup>
+
 					
 
 

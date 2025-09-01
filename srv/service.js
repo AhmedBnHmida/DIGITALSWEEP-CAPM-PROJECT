@@ -81,4 +81,22 @@ module.exports = cds.service.impl(async function () {
       return req.reject(500, "Could not fetch weather data");
     }
   });
+
+
+  /**************************************************************************** */
+  const { Invoices, InvoiceStatus } = this.entities;
+
+  this.on('changeStatus', Invoices, async (req) => {
+      const { InvoiceID, Status } = req.data;
+
+      // Ensure status exists
+      const validStatus = await SELECT.one.from(InvoiceStatus).where({ Status });
+      if (!validStatus) return req.error(400, 'Invalid status');
+
+      // Update invoice association
+      await UPDATE(Invoices).set({ Status_Status: Status }).where({ InvoiceID });
+      return { message: `Invoice ${InvoiceID} status updated to ${Status}` };
+  });
+
+
 });

@@ -5,19 +5,6 @@ type ExchangeRateResponse {
   value : Decimal;
 }
 
-/*
-type TemperatureReading {
-  dateTime: String;
-  temperature: Decimal(10,2);
-}
-
-type WeatherResponse {
-  temperatures: array of TemperatureReading;
-  description: String;
-}
-*/
-
-
 service Financeservice {
 
   // Entity for custom app
@@ -46,4 +33,9 @@ service Financeservice {
 
   entity MouthNumber as projection on myFinance.MouthNumber;
   entity Segments as projection on myFinance.Segments;
+
+  // Invoices entity
+  entity Invoices      as projection on myFinance.Invoices;
+  //entity Invoices @odata.draft.enabled as projection on myFinance.Invoices;
+  entity InvoiceStatus as projection on myFinance.InvoiceStatus;
 }

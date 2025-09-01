@@ -1,0 +1,49 @@
+<mvc:View
+    controllerName="customdgfiori.controller.Invoices.ListInvoice"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Invoices List" showNavButton="false">
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <Table id="invoiceTable" items="{/Invoices}">
+                <headerToolbar>
+                    <Toolbar>
+                    <Title text="Invoices"/>
+                    <ToolbarSpacer/>
+                    <Button text="Create" icon="sap-icon://add" press=".onCreate"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column><Text text="Customer Name"/></Column>
+                    <Column><Text text="Country"/></Column>
+                    <Column><Text text="Amount"/></Column>
+                    <Column><Text text="Currency"/></Column>
+                    <Column><Text text="Status"/></Column>
+                    <Column><Text text="Issue Date"/></Column>
+                    <Column><Text text="Due Date"/></Column>
+                    <Column><Text text="Actions"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                    <cells>
+                        <Text text="{CustomerName}"/>
+                        <Text text="{Country}"/>
+                        <Text text="{Amount}"/>
+                        <Text text="{Currency}"/>
+                        <ObjectStatus 
+                        text="{Status}" 
+                        state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : ${Status} === 'Rejected' ? 'Error' : 'None' }" />
+                        <Text text="{path: 'IssueDate', formatter: '.formatDate'}"/>
+                        <Text text="{path: 'DueDate', formatter: '.formatDate'}"/>
+                        <HBox>
+                        <Button text="Edit" press=".onEdit"/>
+                        <Button text="Delete" press=".onDelete"/>
+                        <Button text="Detail" press=".onDetail"/>
+                        </HBox>
+                    </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+    </Page>
+</mvc:View>

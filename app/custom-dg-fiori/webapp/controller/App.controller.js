@@ -104,7 +104,21 @@ sap.ui.define([
 
       // Open menu relative to Avatar
       this._oAvatarMenu.openBy(oButton);
+    },
+
+
+    onCreateInvoicePress: function() {
+        this.getOwnerComponent().getRouter().navTo("CreateInvoice");
+    },
+
+    onListInvoicePress: function() {
+        this.getOwnerComponent().getRouter().navTo("ListInvoice");
+    },
+/*
+    onInvoiceDetailPress: function() {
+        this.getOwnerComponent().getRouter().navTo("InvoiceDetail");
     }
+*/
 
 
   });
