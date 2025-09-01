@@ -29,6 +29,16 @@ sap.ui.define([
 
     onNavBack: function () {
       this.getOwnerComponent().getRouter().navTo("ListInvoice");
+    },
+
+    onEdit: function (oEvent) {
+      const oCtx = oEvent.getSource().getBindingContext();
+      if (!oCtx) return MessageBox.error("Cannot edit: context missing");
+
+      const sId = oCtx.getProperty("InvoiceID");
+      if (!sId) return MessageBox.error("Cannot edit: ID missing");
+
+      this.getOwnerComponent().getRouter().navTo("EditInvoice", { id: sId });
     }
 
   });

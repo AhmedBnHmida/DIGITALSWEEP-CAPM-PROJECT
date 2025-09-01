@@ -1,18 +1,146 @@
 <mvc:View
     controllerName="customdgfiori.controller.Invoices.ListInvoice"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
 
     <Page title="Invoices List" showNavButton="false">
         <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+
+            <!-- Search Section -->
+            <VBox class="sapUiSmallMargin">
+                <HBox class="sapUiSmallMargin" wrap="Wrap">
+
+                
+                    <!-- global search field -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Search All:" labelFor="globalSearch"/>
+                        <SearchField
+                            id="globalSearch"
+                            placeholder="Search all fields..."
+                            liveChange=".onGlobalSearch"
+                            width="25rem"/>
+                    </VBox>
+
+
+                    <!-- Customer Name -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Customer Name:" labelFor="customerSearch"/>
+                        <Input
+                            id="customerSearch"
+                            placeholder="Search by Customer..."
+                            liveChange=".onSearchCustomer"
+                            width="15rem" />
+                    </VBox>
+
+                    <!-- Country -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Country:" labelFor="countrySearch"/>
+                        <Input
+                            id="countrySearch"
+                            placeholder="Search by Country..."
+                            liveChange=".onSearchCountry"
+                            width="15rem" />
+                    </VBox>
+
+                    <!-- Amount -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Amount:" labelFor="amountSearch"/>
+                        <Input
+                            id="amountSearch"
+                            placeholder="Search by Amount..."
+                            liveChange=".onSearchAmount"
+                            width="10rem" />
+                    </VBox>
+
+                    <!-- Currency -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Currency:" labelFor="currencySearch"/>
+                        <Select
+                            id="currencySearch"
+                            change=".onSearchCurrency"
+                            width="10rem">
+                            <items>
+                                <core:Item key="" text="All"/>
+                                <core:Item key="USD" text="US Dollar"/>
+                                <core:Item key="EUR" text="Euro"/>
+                                <core:Item key="GBP" text="British Pound"/>
+                                <core:Item key="JPY" text="Japanese Yen"/>
+                                <core:Item key="TND" text="Tunisian Dinar"/>
+                            </items>
+                        </Select>
+                    </VBox>
+
+                    <!-- Status -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Status:" labelFor="statusSearch"/>
+                        <Select
+                            id="statusSearch"
+                            change=".onSearchStatus"
+                            width="10rem">
+                            <items>
+                                <core:Item key="" text="All"/>
+                                <core:Item key="Pending" text="Pending"/>
+                                <core:Item key="Approved" text="Approved"/>
+                                <core:Item key="Rejected" text="Rejected"/>
+                                <core:Item key="Paid" text="Paid"/>
+                            </items>
+                        </Select>
+                    </VBox>
+
+                    <!-- Issue Date -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Issue Date:" labelFor="issueDateSearch"/>
+                        <DatePicker
+                            id="issueDateSearch"
+                            change=".onSearchIssueDate"
+                            displayFormat="yyyy-MM-dd"
+                            width="12rem"/>
+                    </VBox>
+
+                    <!-- Due Date -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Due Date:" labelFor="dueDateSearch"/>
+                        <DatePicker
+                            id="dueDateSearch"
+                            change=".onSearchDueDate"
+                            displayFormat="yyyy-MM-dd"
+                            width="12rem"/>
+                    </VBox>
+
+                    <!-- Related Segment -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Segment:" labelFor="segmentSearch"/>
+                        <Select
+                            id="segmentSearch"
+                            change=".onSearchSegment"
+                            width="15rem">
+                            <items>
+                                <core:Item key="" text="All"/>
+                                <core:Item key="cc" text="cc"/>
+                                <core:Item key="Channel Partners" text="Channel Partners"/>
+                                <core:Item key="Enterprise" text="Enterprise"/>
+                                <core:Item key="Government" text="Government"/>
+                                <core:Item key="Midmarket" text="Midmarket"/>
+                                <core:Item key="Small Business" text="Small Business"/>
+                            </items>
+                        </Select>
+                    </VBox>
+
+                </HBox>
+            </VBox>
+
+
+
             <Table id="invoiceTable" items="{/Invoices}">
                 <headerToolbar>
                     <Toolbar>
-                    <Title text="Invoices"/>
-                    <ToolbarSpacer/>
-                    <Button text="Create" icon="sap-icon://add" press=".onCreate"/>
+                        <Title text="Invoices"/>
+                        <ToolbarSpacer/>
+                        <Button text="Create" icon="sap-icon://add" press=".onCreate"/>
                     </Toolbar>
                 </headerToolbar>
+
                 <columns>
                     <Column><Text text="Customer Name"/></Column>
                     <Column><Text text="Country"/></Column>
@@ -23,24 +151,42 @@
                     <Column><Text text="Due Date"/></Column>
                     <Column><Text text="Actions"/></Column>
                 </columns>
+
                 <items>
                     <ColumnListItem type="Active">
-                    <cells>
-                        <Text text="{CustomerName}"/>
-                        <Text text="{Country}"/>
-                        <Text text="{Amount}"/>
-                        <Text text="{Currency}"/>
-                        <ObjectStatus 
-                        text="{Status}" 
-                        state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : ${Status} === 'Rejected' ? 'Error' : 'None' }" />
-                        <Text text="{path: 'IssueDate', formatter: '.formatDate'}"/>
-                        <Text text="{path: 'DueDate', formatter: '.formatDate'}"/>
-                        <HBox>
-                        <Button text="Edit" press=".onEdit"/>
-                        <Button text="Delete" press=".onDelete"/>
-                        <Button text="Detail" press=".onDetail"/>
-                        </HBox>
-                    </cells>
+                        <cells>
+                            <Text text="{CustomerName}"/>
+                            <Text text="{Country}"/>
+                            <Text text="{Amount}"/>
+                            <Text text="{Currency}"/>
+                            <!-- Status Display + Update -->
+                            <HBox>
+                                <ObjectStatus
+                                    text="{Status}"
+                                    inverted="true"
+                                    icon="{= ${Status} === 'Approved' ? 'sap-icon://sys-enter-2' : ${Status} === 'Pending' ? 'sap-icon://alert' : 'sap-icon://error' }"
+                                    state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : 'Error' }"
+                                    active="true" />
+
+                                <Select
+                                    selectedKey="{Status}"
+                                    change=".onStatusChange"
+                                    width="2rem">
+                                    <items>
+                                        <core:Item key="Pending" text="⚠" />
+                                        <core:Item key="Approved" text="✔" />
+                                        <core:Item key="Rejected" text="✖" />
+                                    </items>
+                                </Select>
+                            </HBox>
+                            <Text text="{path: 'IssueDate', formatter: '.formatDate'}"/>
+                            <Text text="{path: 'DueDate', formatter: '.formatDate'}"/>
+                            <HBox>
+                                <Button text="Edit" press=".onEdit"/>
+                                <Button text="Delete" press=".onDelete"/>
+                                <Button text="Detail" press=".onDetail"/>
+                            </HBox>
+                        </cells>
                     </ColumnListItem>
                 </items>
             </Table>

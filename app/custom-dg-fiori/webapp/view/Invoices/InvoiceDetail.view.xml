@@ -59,7 +59,8 @@
                 </FlexBox>
 
                 <HBox class="sapUiSmallMarginTop" justifyContent="Start">
-                    <Button text="Edit" type="Accept" press=".onEdit" />
+                   <!--  <Button text="Edit" type="Accept" press=".onEdit" />  -->
+                    <Button text="Edit" press=".onEdit"/>
                 </HBox>
 
             </VBox>
