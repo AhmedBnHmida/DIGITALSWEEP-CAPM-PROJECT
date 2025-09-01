@@ -1,3 +1,15 @@
-### Get user by ID
-GET http://localhost:4004/odata/v4/auth/Users/7682876c-d4d8-40a9-a9ed-d38e530b562d
-Accept: application/json
+### Create invoice
+POST http://localhost:4004/odata/v4/financeservice/Invoices
+Content-Type: application/json
+
+{
+  "CustomerName": "ABC Corp",
+  "Country": "Germany",
+  "Amount": 1200.50,
+  "Currency": "EUR",
+  "Status_Status": "Pending",
+  "IssueDate": "2025-08-01",
+  "DueDate": "2025-09-01",
+  "RelatedSegment_SegmentName": "cc"
+}
+

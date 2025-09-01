@@ -1,0 +1,32 @@
+### Get all invoices
+GET http://localhost:4004/odata/v4/financeservice/Invoices
+Content-Type: application/json
+
+### Create new invoice
+POST http://localhost:4004/odata/v4/financeservice/Invoices
+Content-Type: application/json
+
+{
+  "InvoiceNumber": "INV-1001",
+  "CustomerName": "ABC Corp",
+  "Country": "Germany",
+  "Amount": 1200.50,
+  "Currency": "EUR",
+  "Status_Status": "Pending",
+  "IssueDate": "2025-08-01",
+  "DueDate": "2025-09-01",
+  "RelatedSegment_SegmentName": "Consumer"
+}
+
+### Update invoice status
+POST http://localhost:4004/odata/v4/financeservice/Invoices/changeStatus
+Content-Type: application/json
+
+{
+  "InvoiceID": "11111111-1111-1111-1111-111111111111",
+  "Status": "Approved"
+}
+
+### Delete invoice
+DELETE http://localhost:4004/odata/v4/financeservice/Invoices(11111111-1111-1111-1111-111111111111)
+Content-Type: application/json

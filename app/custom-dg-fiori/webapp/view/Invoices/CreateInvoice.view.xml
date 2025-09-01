@@ -1,0 +1,85 @@
+<mvc:View
+  controllerName="customdgfiori.controller.Invoices.CreateInvoice"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Page title="Create Invoice" showNavButton="true" navButtonPress=".onNavBack">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+      <VBox class="sapUiSmallMargin">
+
+        <Input
+          id="inputInvoiceID"
+          placeholder="Invoice ID (UUID)"
+          value="{formModel>/InvoiceID}"
+          editable="false" />
+
+        <Input
+          id="inputCustomerName"
+          placeholder="Customer Name"
+          value="{formModel>/CustomerName}"
+          required="true" />
+
+        <Input
+          id="inputCountryy"
+          placeholder="Country"
+          value="{formModel>/Country}"
+          required="true" />
+
+        <Input
+          id="inputAmount"
+          placeholder="Amount"
+          type="Number"
+          value="{formModel>/Amount}"
+          required="true" />
+<!--
+        <Input
+          id="inputCurrency"
+          placeholder="Currency"
+          value="{formModel>/Currency}"
+          required="true" />
+-->
+        <Select
+          id="selectCurrency"
+          required="true"
+          selectedKey="{formModel>/Currency}"
+          items="{currencyModel>/currencies}">
+          <core:Item key="{currencyModel>key}" text="{currencyModel>text}" />
+        </Select>
+
+
+        <Select
+          id="selectStatus"
+          selectedKey="{formModel>/Status}"
+          items="{statusModel>/statusList}">
+          <core:Item key="{statusModel>Status}" text="{statusModel>Status}" />
+        </Select>
+
+        <Select
+          id="selectRelatedSegment"
+          selectedKey="{formModel>/RelatedSegment}"
+          items="{segmentModel>/segments}">
+          <core:Item key="{segmentModel>SegmentName}" text="{segmentModel>SegmentName}" />
+        </Select>
+
+        <DatePicker
+          id="dateIssueDate"
+          displayFormat="yyyy-MM-dd"
+          placeholder="Issue Date"
+          value="{formModel>/IssueDate}" />
+
+        <DatePicker
+          id="dateDueDate"
+          displayFormat="yyyy-MM-dd"
+          placeholder="Due Date"
+          value="{formModel>/DueDate}" />
+
+        <HBox class="sapUiSmallMarginTop">
+          <Button text="Save" type="Accept" press=".onSavePress" />
+          <Button text="Cancel" type="Reject" press=".onNavBack" />
+        </HBox>
+
+      </VBox>
+    </Panel>
+  </Page>
+</mvc:View>
