@@ -54,15 +54,82 @@ sap.ui.define([
       this.getOwnerComponent().getRouter().navTo("InvoiceDetail", { id: sId });
     },
 
-
+    /**
+     * Format a Date or a date-like string into "yyyy-MM-dd" using LOCAL date parts
+     * (avoids timezone-shift issues caused by toISOString()).
+     *
+     * Accepts:
+     *  - Date object
+     *  - "yyyy-MM-dd" string
+     *  - any string that can be parsed into a Date (best-effort)
+     */
     formatDate: function (sDate) {
-      if (!sDate) return "";
-      let oDate = sDate instanceof Date ? sDate : new Date(sDate);
-      if (isNaN(oDate)) return "";
-      return oDate.toISOString().slice(0, 10); // yyyy-MM-dd
+      if (!sDate && sDate !== 0) return "";
+      let oDate = null;
+
+      if (sDate instanceof Date) {
+        oDate = sDate;
+      } else if (typeof sDate === "string") {
+        // Prefer explicit YYYY-MM-DD or DD/MM/YYYY parsing to avoid UTC parsing surprises.
+        let m;
+        if ((m = sDate.match(/^(\d{4})-(\d{2})-(\d{2})$/))) {
+          // "YYYY-MM-DD" -> local date
+          oDate = new Date(+m[1], +m[2] - 1, +m[3]);
+        } else if ((m = sDate.match(/^(\d{2})\/(\d{2})\/(\d{4})$/))) {
+          // "DD/MM/YYYY" -> local date
+          oDate = new Date(+m[3], +m[2] - 1, +m[1]);
+        } else {
+          // fallback: try to parse then normalize to local Y/M/D
+          const parsed = new Date(sDate);
+          if (!isNaN(parsed)) {
+            oDate = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+          }
+        }
+      } else {
+        // other input -> try to construct
+        const parsed = new Date(sDate);
+        if (!isNaN(parsed)) {
+          oDate = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+        }
+      }
+
+      if (!oDate || isNaN(oDate)) return "";
+
+      const yyyy = oDate.getFullYear();
+      const mm = String(oDate.getMonth() + 1).padStart(2, "0");
+      const dd = String(oDate.getDate()).padStart(2, "0");
+      return `${yyyy}-${mm}-${dd}`;
     },
 
-    onStatusChange: function(oEvent) {
+    /**
+     * Parse a user-entered date string into a local Date object.
+     * Supports:
+     *   - "YYYY-MM-DD"
+     *   - "DD/MM/YYYY"
+     *   - other parseable formats (best-effort)
+     *
+     * Returns null if parsing fails.
+     */
+    _parseDateInput: function (s) {
+      if (!s || typeof s !== "string") return null;
+      const str = s.trim();
+      let m;
+      if ((m = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))) {
+        return new Date(+m[1], +m[2] - 1, +m[3]);
+      }
+      if ((m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
+        // dd/mm/yyyy
+        return new Date(+m[3], +m[2] - 1, +m[1]);
+      }
+      // fallback: parse and normalize to local date
+      const parsed = new Date(str);
+      if (!isNaN(parsed)) {
+        return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+      }
+      return null;
+    },
+
+    onStatusChange: function (oEvent) {
       const oSelectedItem = oEvent.getSource();
       const sNewStatus = oSelectedItem.getSelectedKey();
       const oCtx = oSelectedItem.getBindingContext();
@@ -76,96 +143,90 @@ sap.ui.define([
       });
     },
 
-    // Consolidated filter function for all filters including global search
-    onFilterChange: function() {
-    const oView = this.getView();
-    const oTable = this.byId("invoiceTable");
-    const oBinding = oTable.getBinding("items");
+    // Consolidated filter function
+    onFilterChange: function () {
+      const oView = this.getView();
+      const oTable = this.byId("invoiceTable");
+      const oBinding = oTable.getBinding("items");
 
-    let aFilters = [];
+      let aFilters = [];
 
-    // Customer Name
-    const sCustomer = oView.byId("customerSearch").getValue();
-    if (sCustomer) aFilters.push(new Filter("CustomerName", FilterOperator.Contains, sCustomer));
+      // Customer Name
+      const sCustomer = oView.byId("customerSearch").getValue();
+      if (sCustomer) aFilters.push(new Filter("CustomerName", FilterOperator.Contains, sCustomer));
 
-    // Country
-    const sCountry = oView.byId("countrySearch").getValue();
-    if (sCountry) aFilters.push(new Filter("Country", FilterOperator.Contains, sCountry));
+      // Country
+      const sCountry = oView.byId("countrySearch").getValue();
+      if (sCountry) aFilters.push(new Filter("Country", FilterOperator.Contains, sCountry));
 
-    // Amount
-    const sAmount = oView.byId("amountSearch").getValue();
-    if (sAmount && !isNaN(sAmount)) aFilters.push(new Filter("Amount", FilterOperator.EQ, parseFloat(sAmount)));
+      // Amount
+      const sAmount = oView.byId("amountSearch").getValue();
+      if (sAmount && !isNaN(sAmount)) aFilters.push(new Filter("Amount", FilterOperator.EQ, parseFloat(sAmount)));
 
-    // Currency
-    const sCurrency = oView.byId("currencySearch").getSelectedKey();
-    if (sCurrency) aFilters.push(new Filter("Currency", FilterOperator.EQ, sCurrency));
+      // Currency
+      const sCurrency = oView.byId("currencySearch").getSelectedKey();
+      if (sCurrency) aFilters.push(new Filter("Currency", FilterOperator.EQ, sCurrency));
 
-    // Status
-    const sStatus = oView.byId("statusSearch").getSelectedKey();
-    if (sStatus) aFilters.push(new Filter("Status", FilterOperator.EQ, sStatus));
+      // Status
+      const sStatus = oView.byId("statusSearch").getSelectedKey();
+      if (sStatus) aFilters.push(new Filter("Status", FilterOperator.EQ, sStatus));
 
-    // Issue Date range filter
-    const oIssueDate = oView.byId("issueDateSearch").getDateValue();
-    if (oIssueDate) {
-      const sIssueDate = this.formatDate(oIssueDate);
-      const oNextIssueDate = new Date(oIssueDate);
-      oNextIssueDate.setDate(oNextIssueDate.getDate() + 1);
-      const sNextIssueDate = this.formatDate(oNextIssueDate);
+      // Issue Date (single date match — uses local yyyy-MM-dd)
+      const oIssueDate = oView.byId("issueDateSearch").getDateValue();
+      if (oIssueDate) {
+        const sIssueDate = this.formatDate(oIssueDate);
+        aFilters.push(new Filter("IssueDate", FilterOperator.EQ, sIssueDate));
+      }
 
-      const oFilterIssueFrom = new Filter("IssueDate", FilterOperator.GE, sIssueDate);
-      const oFilterIssueTo = new Filter("IssueDate", FilterOperator.LT, sNextIssueDate);
-      aFilters.push(new Filter([oFilterIssueFrom, oFilterIssueTo], true));
-    }
+      // Due Date (single date match — uses local yyyy-MM-dd)
+      const oDueDate = oView.byId("dueDateSearch").getDateValue();
+      if (oDueDate) {
+        const sDueDate = this.formatDate(oDueDate);
+        aFilters.push(new Filter("DueDate", FilterOperator.EQ, sDueDate));
+      }
 
-    // Due Date range filter
-    const oDueDate = oView.byId("dueDateSearch").getDateValue();
-    if (oDueDate) {
-      const sDueDate = this.formatDate(oDueDate);
-      const oNextDueDate = new Date(oDueDate);
-      oNextDueDate.setDate(oNextDueDate.getDate() + 1);
-      const sNextDueDate = this.formatDate(oNextDueDate);
+      // Related Segment
+      const sSegment = oView.byId("segmentSearch").getSelectedKey();
+      if (sSegment) aFilters.push(new Filter("RelatedSegment", FilterOperator.EQ, sSegment));
 
-      const oFilterDueFrom = new Filter("DueDate", FilterOperator.GE, sDueDate);
-      const oFilterDueTo = new Filter("DueDate", FilterOperator.LT, sNextDueDate);
-      aFilters.push(new Filter([oFilterDueFrom, oFilterDueTo], true));
-    }
+      // Global Search
+      const sGlobalQuery = oView.byId("globalSearch").getValue();
+      if (sGlobalQuery) {
+        let aGlobalFilters = [
+          new Filter("CustomerName", FilterOperator.Contains, sGlobalQuery),
+          new Filter("Country", FilterOperator.Contains, sGlobalQuery),
+          !isNaN(sGlobalQuery) ? new Filter("Amount", FilterOperator.EQ, parseFloat(sGlobalQuery)) : null,
+          new Filter("Currency", FilterOperator.Contains, sGlobalQuery),
+          new Filter("Status", FilterOperator.Contains, sGlobalQuery),
+          new Filter("RelatedSegment", FilterOperator.Contains, sGlobalQuery)
+        ];
 
-    // Related Segment
-    const sSegment = oView.byId("segmentSearch").getSelectedKey();
-    if (sSegment) aFilters.push(new Filter("RelatedSegment", FilterOperator.EQ, sSegment));
+        // Try parse as a date (local)
+        const oParsedDate = this._parseDateInput(sGlobalQuery);
+        if (oParsedDate) {
+          const sDateStr = this.formatDate(oParsedDate);
+          aGlobalFilters.push(new Filter("IssueDate", FilterOperator.EQ, sDateStr));
+          aGlobalFilters.push(new Filter("DueDate", FilterOperator.EQ, sDateStr));
+        }
 
-    // Global Search filters applied as OR group combined with other filters
-    const sGlobalQuery = oView.byId("globalSearch").getValue();
-    if (sGlobalQuery) {
-      let aGlobalFilters = [
-        new Filter("CustomerName", FilterOperator.Contains, sGlobalQuery),
-        new Filter("Country", FilterOperator.Contains, sGlobalQuery),
-        !isNaN(sGlobalQuery) ? new Filter("Amount", FilterOperator.EQ, parseFloat(sGlobalQuery)) : null,
-        new Filter("Currency", FilterOperator.Contains, sGlobalQuery),
-        new Filter("Status", FilterOperator.Contains, sGlobalQuery),
-        new Filter("IssueDate", FilterOperator.Contains, sGlobalQuery),
-        new Filter("DueDate", FilterOperator.Contains, sGlobalQuery),
-        new Filter("RelatedSegment", FilterOperator.Contains, sGlobalQuery)
-      ].filter(f => f !== null);
+        aGlobalFilters = aGlobalFilters.filter(f => f !== null);
+        aFilters.push(new Filter(aGlobalFilters, false)); // OR group
+      }
 
-      aFilters.push(new Filter(aGlobalFilters, false)); // OR combination inside AND
-    }
+      // Apply combined filters (AND between the groups)
+      oBinding.filter(aFilters.length ? new Filter(aFilters, true) : []);
+    },
 
-    // Apply combined filters (AND)
-    oBinding.filter(aFilters.length ? new Filter(aFilters, true) : []);
-  },
-
-
-    // For individual search inputs, just call onFilterChange to avoid overwriting
-    onSearchCustomer: function() { this.onFilterChange(); },
-    onSearchCountry: function() { this.onFilterChange(); },
-    onSearchAmount: function() { this.onFilterChange(); },
-    onSearchCurrency: function() { this.onFilterChange(); },
-    onSearchStatus: function() { this.onFilterChange(); },
-    onSearchIssueDate: function() { this.onFilterChange(); },
-    onSearchDueDate: function() { this.onFilterChange(); },
-    onSearchSegment: function() { this.onFilterChange(); },
-    onGlobalSearch: function() { this.onFilterChange(); }
+    // Individual search handlers just call central filter function
+    onSearchCustomer: function () { this.onFilterChange(); },
+    onSearchCountry: function () { this.onFilterChange(); },
+    onSearchAmount: function () { this.onFilterChange(); },
+    onSearchCurrency: function () { this.onFilterChange(); },
+    onSearchStatus: function () { this.onFilterChange(); },
+    onSearchIssueDate: function () { this.onFilterChange(); },
+    onSearchDueDate: function () { this.onFilterChange(); },
+    onSearchSegment: function () { this.onFilterChange(); },
+    onGlobalSearch: function () { this.onFilterChange(); }
 
   });
 });
