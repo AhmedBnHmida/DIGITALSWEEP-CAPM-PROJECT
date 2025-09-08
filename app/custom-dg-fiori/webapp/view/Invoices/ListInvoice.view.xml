@@ -23,7 +23,7 @@
                     </VBox>
 
 
-                    <!-- Customer Name -->
+                    <!-- Customer Name
                     <VBox class="sapUiSmallMargin">
                         <Label text="Customer Name:" labelFor="customerSearch"/>
                         <Input
@@ -31,9 +31,9 @@
                             placeholder="Search by Customer..."
                             liveChange=".onSearchCustomer"
                             width="15rem" />
-                    </VBox>
+                    </VBox> -->
 
-                    <!-- Country -->
+                    <!-- Country
                     <VBox class="sapUiSmallMargin">
                         <Label text="Country:" labelFor="countrySearch"/>
                         <Input
@@ -41,9 +41,26 @@
                             placeholder="Search by Country..."
                             liveChange=".onSearchCountry"
                             width="15rem" />
+                    </VBox> -->
+
+                    <!-- Country Multi-Select -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Country:" labelFor="countrySearch"/>
+                        <MultiComboBox
+                            id="countrySearch"
+                            selectionFinish=".onSearchCountry"
+                            width="15rem"
+                            showSecondaryValues="true"
+                            items="{
+                                path: '/Invoices',
+                                parameters: { $apply: 'groupby((Country))' }
+                            }">
+                            <core:Item key="{Country}" text="{Country}"/>
+                        </MultiComboBox>
                     </VBox>
 
-                    <!-- Amount -->
+
+                    <!-- Amount
                     <VBox class="sapUiSmallMargin">
                         <Label text="Amount:" labelFor="amountSearch"/>
                         <Input
@@ -51,7 +68,7 @@
                             placeholder="Search by Amount..."
                             liveChange=".onSearchAmount"
                             width="10rem" />
-                    </VBox>
+                    </VBox> -->
 
                     <!-- Currency -->
                     <VBox class="sapUiSmallMargin">
@@ -168,6 +185,7 @@
                                     state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : 'Error' }"
                                     active="true" />
 
+                                <!--
                                 <Select
                                     selectedKey="{Status}"
                                     change=".onStatusChange"
@@ -177,7 +195,8 @@
                                         <core:Item key="Approved" text="✔" />
                                         <core:Item key="Rejected" text="✖" />
                                     </items>
-                                </Select>
+                                </Select>   
+                                -->
                             </HBox>
                             <Text text="{path: 'IssueDate', formatter: '.formatDate'}"/>
                             <Text text="{path: 'DueDate', formatter: '.formatDate'}"/>

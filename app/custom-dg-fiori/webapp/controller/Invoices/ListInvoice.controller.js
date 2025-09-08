@@ -128,7 +128,7 @@ sap.ui.define([
       }
       return null;
     },
-
+/*
     onStatusChange: function (oEvent) {
       const oSelectedItem = oEvent.getSource();
       const sNewStatus = oSelectedItem.getSelectedKey();
@@ -142,7 +142,7 @@ sap.ui.define([
         error: (err) => MessageBox.error(`Failed to update status: ${err.message}`)
       });
     },
-
+*/
     // Consolidated filter function
     onFilterChange: function () {
       const oView = this.getView();
@@ -151,17 +151,28 @@ sap.ui.define([
 
       let aFilters = [];
 
-      // Customer Name
+      /* Customer Name
       const sCustomer = oView.byId("customerSearch").getValue();
       if (sCustomer) aFilters.push(new Filter("CustomerName", FilterOperator.Contains, sCustomer));
+      */
 
-      // Country
+      /* Country
       const sCountry = oView.byId("countrySearch").getValue();
       if (sCountry) aFilters.push(new Filter("Country", FilterOperator.Contains, sCountry));
+      */
+     
+      // Country (multi-select)
+      const aSelectedCountries = oView.byId("countrySearch").getSelectedKeys();
+      if (aSelectedCountries.length > 0) {
+        const aCountryFilters = aSelectedCountries.map(c => new Filter("Country", FilterOperator.EQ, c));
+        aFilters.push(new Filter(aCountryFilters, false)); // OR between selected countries
+      }
 
-      // Amount
+
+      /* Amount
       const sAmount = oView.byId("amountSearch").getValue();
       if (sAmount && !isNaN(sAmount)) aFilters.push(new Filter("Amount", FilterOperator.EQ, parseFloat(sAmount)));
+      */
 
       // Currency
       const sCurrency = oView.byId("currencySearch").getSelectedKey();
@@ -193,9 +204,9 @@ sap.ui.define([
       const sGlobalQuery = oView.byId("globalSearch").getValue();
       if (sGlobalQuery) {
         let aGlobalFilters = [
-          new Filter("CustomerName", FilterOperator.Contains, sGlobalQuery),
+          //new Filter("CustomerName", FilterOperator.Contains, sGlobalQuery),
           new Filter("Country", FilterOperator.Contains, sGlobalQuery),
-          !isNaN(sGlobalQuery) ? new Filter("Amount", FilterOperator.EQ, parseFloat(sGlobalQuery)) : null,
+          //!isNaN(sGlobalQuery) ? new Filter("Amount", FilterOperator.EQ, parseFloat(sGlobalQuery)) : null,
           new Filter("Currency", FilterOperator.Contains, sGlobalQuery),
           new Filter("Status", FilterOperator.Contains, sGlobalQuery),
           new Filter("RelatedSegment", FilterOperator.Contains, sGlobalQuery)
@@ -218,9 +229,9 @@ sap.ui.define([
     },
 
     // Individual search handlers just call central filter function
-    onSearchCustomer: function () { this.onFilterChange(); },
+    //onSearchCustomer: function () { this.onFilterChange(); },
     onSearchCountry: function () { this.onFilterChange(); },
-    onSearchAmount: function () { this.onFilterChange(); },
+    //onSearchAmount: function () { this.onFilterChange(); },
     onSearchCurrency: function () { this.onFilterChange(); },
     onSearchStatus: function () { this.onFilterChange(); },
     onSearchIssueDate: function () { this.onFilterChange(); },

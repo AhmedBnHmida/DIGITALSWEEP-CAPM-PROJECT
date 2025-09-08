@@ -36,9 +36,12 @@
                     </VBox>
                     <VBox width="30%">
                         <Label text="Status" />
-                        <ObjectStatus 
+                         <ObjectStatus
                             text="{Status}"
-                            state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : ${Status} === 'Rejected' ? 'Error' : 'None' }" />
+                            inverted="true"
+                            icon="{= ${Status} === 'Approved' ? 'sap-icon://sys-enter-2' : ${Status} === 'Pending' ? 'sap-icon://alert' : 'sap-icon://error' }"
+                            state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : 'Error' }"
+                            active="true" />
                     </VBox>
                 </FlexBox>
 
@@ -61,6 +64,7 @@
                 <HBox class="sapUiSmallMarginTop" justifyContent="Start">
                    <!--  <Button text="Edit" type="Accept" press=".onEdit" />  -->
                     <Button text="Edit" press=".onEdit"/>
+                    <Button text="Change Status" type="Emphasized" press=".onOpenStatusDialog" class="sapUiTinyMarginBegin"/>
                 </HBox>
 
             </VBox>

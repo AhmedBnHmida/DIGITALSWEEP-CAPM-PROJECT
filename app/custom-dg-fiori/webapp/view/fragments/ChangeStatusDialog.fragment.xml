@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog
+        id="changeStatusDialog"
+        title="Change Invoice Status"
+        draggable="true"
+        resizable="true">
+
+        <VBox class="sapUiSmallMargin">
+            <Label text="Select new status:"/>
+            <Select id="statusSelect">
+                <core:Item key="Pending" text="Pending"/>
+                <core:Item key="Approved" text="Approved"/>
+                <core:Item key="Rejected" text="Rejected"/>
+            </Select>
+        </VBox>
+
+        <beginButton>
+            <Button text="Confirm" type="Accept" press=".onConfirmStatusChange"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" type="Reject" press=".onCloseStatusDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
