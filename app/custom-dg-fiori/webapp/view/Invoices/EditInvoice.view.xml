@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
 
-    <Page title="Edit Invoice" showNavButton="true" navButtonPress=".onCancel">
+    <Page title="Edit Invoice" showNavButton="false" navButtonPress=".onCancel" showHeader="false">
         <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
             <VBox class="sapUiSmallMargin" width="700px">
 

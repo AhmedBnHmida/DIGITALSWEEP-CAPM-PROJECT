@@ -15,18 +15,6 @@ namespace myFinance;
         { Property: 'Profit' }
     ]
 }
-/*
-@Capabilities : {
-   FilterRestrictions : {
-      FilterExpressionRestrictions : [
-         {
-            Property : 'Date',
-            AllowedExpressions : 'SingleRange'
-         }
-      ]
-   }
-}
-*/
 
 entity Finance  { 
 

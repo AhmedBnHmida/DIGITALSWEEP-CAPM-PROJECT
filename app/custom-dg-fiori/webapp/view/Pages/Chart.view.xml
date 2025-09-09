@@ -7,7 +7,7 @@
   xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
   height="100%">
 
-  <Page title="Sales &amp; Profit Pie Chart" showNavButton="true" navButtonPress=".onNavBack" >
+  <Page title="Sales &amp; Profit Pie Chart" showNavButton="true" navButtonPress=".onNavBack" showHeader="false" >
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" >
       <VBox fitContainer="true">
         <viz:VizFrame

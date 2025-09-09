@@ -6,7 +6,7 @@
   xmlns:vbm="sap.ui.vbm"
   height="100%"
   displayBlock="true">
-  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack">
+  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack" showHeader="false">
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
       <vbm:GeoMap
         id="vbi"

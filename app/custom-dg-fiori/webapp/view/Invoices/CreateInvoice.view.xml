@@ -4,7 +4,7 @@
   xmlns="sap.m"
   xmlns:core="sap.ui.core">
 
-  <Page title="Create Invoice" showNavButton="true" navButtonPress=".onNavBack">
+  <Page title="Create Invoice" showNavButton="false" navButtonPress=".onNavBack" showHeader="false">
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
       <VBox class="sapUiSmallMargin">
 
@@ -32,13 +32,7 @@
           type="Number"
           value="{formModel>/Amount}"
           required="true" />
-<!--
-        <Input
-          id="inputCurrency"
-          placeholder="Currency"
-          value="{formModel>/Currency}"
-          required="true" />
--->
+
         <Select
           id="selectCurrency"
           required="true"

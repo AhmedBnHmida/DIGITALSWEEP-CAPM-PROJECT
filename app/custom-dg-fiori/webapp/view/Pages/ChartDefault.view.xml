@@ -7,7 +7,7 @@
   xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
   height="100%">
 
-  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack">
+  <Page title="View Chart Default" showNavButton="true" navButtonPress=".onNavBack" showHeader="false" >
     <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
       <!-- Horizontal Box to place charts side by side -->
       <HBox fitContainer="true" justifyContent="Center" alignItems="Start" renderType="Bare">

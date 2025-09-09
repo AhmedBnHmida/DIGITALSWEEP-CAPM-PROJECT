@@ -10,7 +10,8 @@
             <Select id="statusSelect">
                 <core:Item key="Pending" text="Pending"/>
                 <core:Item key="Approved" text="Approved"/>
-                <core:Item key="Rejected" text="Rejected"/>
+                <core:Item key="Paid" text="Paid"/>
+                <core:Item key="Rejected" text="Rejected"/> 
             </Select>
         </VBox>
 

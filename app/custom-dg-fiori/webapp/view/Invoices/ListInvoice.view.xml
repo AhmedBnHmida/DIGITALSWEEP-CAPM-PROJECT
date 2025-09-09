@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
 
-    <Page title="Invoices List" showNavButton="false">
+    <Page title="Invoices List" showNavButton="false" showHeader="false">
         <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
 
             <!-- Search Section -->
@@ -181,8 +181,8 @@
                                 <ObjectStatus
                                     text="{Status}"
                                     inverted="true"
-                                    icon="{= ${Status} === 'Approved' ? 'sap-icon://sys-enter-2' : ${Status} === 'Pending' ? 'sap-icon://alert' : 'sap-icon://error' }"
-                                    state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : 'Error' }"
+                                    icon="{= ${Status} === 'Approved' ? 'sap-icon://sys-enter-2' : ${Status} === 'Pending' ? 'sap-icon://alert' : ${Status} === 'Paid' ? 'sap-icon://money-bills' : 'sap-icon://error' }"
+                                    state="{= ${Status} === 'Approved' ? 'Success' : ${Status} === 'Pending' ? 'Warning' : ${Status} === 'Paid' ? 'Success' : 'Error' }"
                                     active="true" />
 
                                 <!--
