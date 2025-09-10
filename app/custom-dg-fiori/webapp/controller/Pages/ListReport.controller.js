@@ -206,6 +206,26 @@ sap.ui.define([
                 aFilters.push(new Filter("Date", FilterOperator.EQ, sDateStr));
             }
 
+            // Decimal / Numeric range filters helper
+            function addRangeFilter(fieldIdMin, fieldIdMax, fieldName) {
+                var minVal = oView.byId(fieldIdMin).getValue();
+                var maxVal = oView.byId(fieldIdMax).getValue();
+                if (minVal || maxVal) {
+                    var min = minVal ? parseFloat(minVal) : -Infinity;
+                    var max = maxVal ? parseFloat(maxVal) : Infinity;
+                    aFilters.push(new Filter(fieldName, FilterOperator.BT, min, max));
+                }
+            }
+
+            addRangeFilter("profitMin", "profitMax", "Profit");
+            addRangeFilter("cogsMin", "cogsMax", "COGS");
+            addRangeFilter("salesMin", "salesMax", "Sales");
+            addRangeFilter("salePriceMin", "salePriceMax", "Sale_Price");
+            addRangeFilter("grossSalesMin", "grossSalesMax", "Gross_Sales");
+            addRangeFilter("manuPriceMin", "manuPriceMax", "Manufacturing_Price");
+            addRangeFilter("unitsSoldMin", "unitsSoldMax", "Units_Sold");
+            addRangeFilter("discountsMin", "discountsMax", "Discounts");
+
             // Apply combined filters with AND logic
             oBinding.filter(aFilters.length ? new Filter(aFilters, true) : []);
         },

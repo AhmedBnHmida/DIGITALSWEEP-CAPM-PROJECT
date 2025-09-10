@@ -9,88 +9,143 @@
             <!-- Search Section -->
             <VBox class="sapUiSmallMargin">
                 <HBox class="sapUiSmallMargin" wrap="Wrap">
-                  <!-- Global Search -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Global Search:" labelFor="globalSearch1"/>
-                      <SearchField id="globalSearch1" width="25rem" liveChange=".onFilterChange" placeholder="Search all fields..." />
-                  </VBox>
 
-                  <!-- Country -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Country:" labelFor="countrySearch1"/>
-                      <MultiComboBox id="countrySearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="All"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Country))' } }">
-                          <core:Item key="{Country}" text="{Country}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <!-- Global Search -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Global Search:" labelFor="globalSearch1"/>
+                        <SearchField id="globalSearch1" width="25rem" liveChange=".onFilterChange" placeholder="Search all fields..." />
+                    </VBox>
 
-                  <!-- Segment -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Segment:" labelFor="segmentSearch1"/>
-                      <MultiComboBox id="segmentSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="All"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Segment))' } }">
-                          <core:Item key="{Segment}" text="{Segment}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <!-- MultiComboBox Filters -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Country:" labelFor="countrySearch1"/>
+                        <MultiComboBox id="countrySearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Country"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Country))' } }">
+                            <core:Item key="{Country}" text="{Country}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Product -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Product:" labelFor="productSearch1"/>
-                      <MultiComboBox id="productSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="Select Product"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Product))' } }">
-                          <core:Item key="{Product}" text="{Product}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Segment:" labelFor="segmentSearch1"/>
+                        <MultiComboBox id="segmentSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Segment"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Segment))' } }">
+                            <core:Item key="{Segment}" text="{Segment}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Discount Band -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Discount Band:" labelFor="discountBandSearch1"/>
-                      <MultiComboBox id="discountBandSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="Select Discount Band"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Discount_Band))' } }">
-                          <core:Item key="{Discount_Band}" text="{Discount_Band}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Product:" labelFor="productSearch1"/>
+                        <MultiComboBox id="productSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Product"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Product))' } }">
+                            <core:Item key="{Product}" text="{Product}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Month Name -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Month Name:" labelFor="monthNameSearch1"/>
-                      <MultiComboBox id="monthNameSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="Select Month"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Name))' } }">
-                          <core:Item key="{Month_Name}" text="{Month_Name}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Discount Band:" labelFor="discountBandSearch1"/>
+                        <MultiComboBox id="discountBandSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Discount Band"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Discount_Band))' } }">
+                            <core:Item key="{Discount_Band}" text="{Discount_Band}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Month Number -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Month Number:" labelFor="monthNumberSearch1"/>
-                      <MultiComboBox id="monthNumberSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="Select Month Number"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Number))' } }">
-                          <core:Item key="{Month_Number}" text="{Month_Number}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <!-- Month Filters -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Month Name:" labelFor="monthNameSearch1"/>
+                        <MultiComboBox id="monthNameSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Month"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Name))' } }">
+                            <core:Item key="{Month_Name}" text="{Month_Name}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Year -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Year:" labelFor="yearSearch1"/>
-                      <MultiComboBox id="yearSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true"
-                          placeholder="Select Year"
-                          items="{ path: '/Finances', parameters: { $apply: 'groupby((Year))' } }">
-                          <core:Item key="{Year}" text="{Year}"/>
-                      </MultiComboBox>
-                  </VBox>
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Month Number:" labelFor="monthNumberSearch1"/>
+                        <MultiComboBox id="monthNumberSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Month Number"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Number))' } }">
+                            <core:Item key="{Month_Number}" text="{Month_Number}"/>
+                        </MultiComboBox>
+                    </VBox>
 
-                  <!-- Date -->
-                  <VBox class="sapUiSmallMargin">
-                      <Label text="Date:" labelFor="dateSearch1"/>
-                      <DatePicker id="dateSearch1" change=".onFilterChange" displayFormat="yyyy-MM-dd" width="12rem"/>
-                  </VBox>
-              </HBox>
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Year:" labelFor="yearSearch1"/>
+                        <MultiComboBox id="yearSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Year"
+                            items="{ path: '/Finances', parameters: { $apply: 'groupby((Year))' } }">
+                            <core:Item key="{Year}" text="{Year}"/>
+                        </MultiComboBox>
+                    </VBox>
+
+                    <!-- Date -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Date:" labelFor="dateSearch1"/>
+                        <DatePicker id="dateSearch1" change=".onFilterChange" displayFormat="yyyy-MM-dd" width="12rem"/>
+                    </VBox>
+
+                    <!-- Decimal Filters -->
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Profit (Min-Max)" labelFor="profitMin"/>
+                        <HBox>
+                            <Input id="profitMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="profitMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="COGS (Min-Max)" labelFor="cogsMin"/>
+                        <HBox>
+                            <Input id="cogsMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="cogsMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Sales (Min-Max)" labelFor="salesMin"/>
+                        <HBox>
+                            <Input id="salesMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="salesMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Sale Price (Min-Max)" labelFor="salePriceMin"/>
+                        <HBox>
+                            <Input id="salePriceMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="salePriceMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Gross Sales (Min-Max)" labelFor="grossSalesMin"/>
+                        <HBox>
+                            <Input id="grossSalesMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="grossSalesMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Manufacturing Price (Min-Max)" labelFor="manuPriceMin"/>
+                        <HBox>
+                            <Input id="manuPriceMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="manuPriceMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Units Sold (Min-Max)" labelFor="unitsSoldMin"/>
+                        <HBox>
+                            <Input id="unitsSoldMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="unitsSoldMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox class="sapUiSmallMargin">
+                        <Label text="Discounts (Min-Max)" labelFor="discountsMin"/>
+                        <HBox>
+                            <Input id="discountsMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
+                            <Input id="discountsMax" width="6rem" placeholder="Max" liveChange=".onFilterChange"/>
+                        </HBox>
+                    </VBox>
+
+                </HBox>
             </VBox>
 
             <!-- Table Section -->
