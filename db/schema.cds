@@ -18,7 +18,7 @@ namespace myFinance;
 
 entity Finance  { 
 
-    key No:Integer;
+    key No:Integer64;
     Segment:String;
     Country:String;
     Product:String; 	 
@@ -35,7 +35,7 @@ entity Finance  {
     Month_Number:Integer;
     Month_Name:String; 	
     Year:Integer;
-    ExchangeRateToEUR : Decimal;
+    ExchangeRateToEUR : Decimal(9,6);
 }
 
 entity  MouthNumber {

@@ -1,15 +1,2 @@
-### Create invoice
-POST http://localhost:4004/odata/v4/financeservice/Invoices
-Content-Type: application/json
-
-{
-  "CustomerName": "ABC Corp",
-  "Country": "Germany",
-  "Amount": 1200.50,
-  "Currency": "EUR",
-  "Status_Status": "Pending",
-  "IssueDate": "2025-08-01",
-  "DueDate": "2025-09-01",
-  "RelatedSegment_SegmentName": "cc"
-}
-
+GET http://localhost:4004/odata/v4/financeservice/Finance
+Accept: application/json

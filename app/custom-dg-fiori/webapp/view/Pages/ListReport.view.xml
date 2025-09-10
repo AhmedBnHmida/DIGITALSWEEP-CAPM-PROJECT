@@ -1,52 +1,35 @@
 <mvc:View
-  controllerName="customdgfiori.controller.Pages.ListReport"
-  xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m">
+    controllerName="customdgfiori.controller.Pages.ListReport"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page showHeader="false">
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <!-- Search Section -->
+            <VBox class="sapUiSmallMargin">
 
-  
-<!--<Page title="Add New Record" showNavButton="true" navButtonPress=".onNavBack">-->
-<Page showHeader="false">
-    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
-    <Button text="Create New Finance Entry" type="Emphasized" press=".onCreatePress"/>
-    <Table
-      id="financeTable"
-      growing="true"
-      growingThreshold="20"
-      headerText="Finance Records"
-      items="{ path: '/Finances' }">
-      <headerToolbar>
-        <Toolbar>
-          <Title text="Finance Data"/>
-        </Toolbar>
-      </headerToolbar>
-      <columns>
-        <Column><Text text="Segment"/></Column>
-        <Column><Text text="Country"/></Column>
-        <Column><Text text="Product"/></Column>
-        <Column><Text text="Sales"/></Column>
-        <Column><Text text="Profit"/></Column>
-        <Column><Text text="Date"/></Column>
-        <Column><Text text="Actions"/></Column> 
-      </columns>
-      <items>
-        <ColumnListItem>
-          <cells>
-            <Text text="{Segment}"/>
-            <Text text="{Country}"/>
-            <Text text="{Product}"/>
-            <Text text="{Sales}"/>
-            <Text text="{Profit}"/>
-            <Text text="{path: 'Date', formatter: '.formatDate'}"/>
-            <HBox>
-              <Button icon="sap-icon://edit" press=".onEditPress" type="Transparent" tooltip="Edit"/>
-              <Button icon="sap-icon://delete" press="onDeletePresss" type="Transparent" tooltip="Delete"/>
-              <Button icon="sap-icon://inspect" press=".onDetailPress" type="Transparent" tooltip="Detail"/>
-            </HBox>
-          </cells>
-        </ColumnListItem>
-      </items>
-    </Table>
-  </Panel>
-  </Page>
-
+            </VBox>
+            <!-- Table view section -->
+            <Table
+                id="financeTable"
+                growing="true"
+                growingThreshold="20"
+                headerText="Finance Records"
+                inset="false"
+                mode="None">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Finance Data"/>
+                        <ToolbarSpacer/>
+                        <Button text="Choose Columns" icon="sap-icon://multi-select" press=".onShowColumnSelection"/>
+                        <Button text="Create" icon="sap-icon://add" press=".onCreatePress"/>
+                    </Toolbar>
+                </headerToolbar>
+                <items>
+                    <ColumnListItem>
+                        <!-- Controls are generated dynamically -->
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+    </Page>
 </mvc:View>
