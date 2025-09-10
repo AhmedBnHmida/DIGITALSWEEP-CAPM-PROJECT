@@ -270,6 +270,81 @@ sap.ui.define([
             );
         },
 
+        onSelectFilters: function () {
+          var oView = this.getView();
+          var aFilterItems = [
+            { id: "countrySearch1", labelId: "countrySearchVBox" },
+            { id: "segmentSearch1", labelId: "segmentSearchVBox" },
+            { id: "productSearch1", labelId: "productSearchVBox" },
+            { id: "discountBandSearch1", labelId: "discountBandSearchVBox" },
+            { id: "monthNameSearch1", labelId: "monthNameSearchVBox" },
+            { id: "monthNumberSearch1", labelId: "monthNumberSearchVBox" },
+            { id: "yearSearch1", labelId: "yearSearchVBox" },
+            { id: "dateSearch1", labelId: "dateSearchVBox" },
+            { id: "profitMin", labelId: "profitVBox" },
+            { id: "cogsMin", labelId: "cogsVBox" },
+            { id: "salesMin", labelId: "salesVBox" },
+            { id: "salePriceMin", labelId: "salePriceVBox" },
+            { id: "grossSalesMin", labelId: "grossSalesVBox" },
+            { id: "manuPriceMin", labelId: "manuPriceVBox" },
+            { id: "unitsSoldMin", labelId: "unitsSoldVBox" },
+            { id: "discountsMin", labelId: "discountsVBox" }
+          ];
+
+          var oVBox = new sap.m.VBox();
+
+          aFilterItems.forEach(function(item) {
+            var oControl = oView.byId(item.id);
+            if (!oControl) {
+              return;
+            }
+
+            // Get the label text from the filter label control for better readability
+            var oLabelVBox = oView.byId(item.labelId);
+            var sLabelText = oLabelVBox && oLabelVBox.getItems().length > 0 
+              ? oLabelVBox.getItems()[0].getText() 
+              : item.id;
+
+            var oCheckBox = new sap.m.CheckBox({
+              text: sLabelText,
+              selected: oLabelVBox ? oLabelVBox.getVisible() : false,
+              select: function(oEvent) {
+                var bSelected = oEvent.getParameter("selected");
+
+                // Show/hide the entire VBox (label + control)
+                if (oLabelVBox) {
+                  oLabelVBox.setVisible(bSelected);
+                }
+              }
+            });
+            oVBox.addItem(oCheckBox);
+          });
+
+          var oDialog = new sap.m.Dialog({
+            title: "Select Filters to Display",
+            content: oVBox,
+            beginButton: new sap.m.Button({
+              text: "Apply",
+              press: function () { oDialog.close(); }
+            }),
+            endButton: new sap.m.Button({ text: "Cancel", press: function () { oDialog.close(); } }),
+            afterClose: function () { oDialog.destroy(); }
+          });
+
+          this.getView().addDependent(oDialog);
+          oDialog.open();
+        },
+
+
+        onHideAllFilters: function () {
+            var oFiltersVBox = this.byId("filtersVBox");
+            if (oFiltersVBox) {
+                var bVisible = oFiltersVBox.getVisible();
+                oFiltersVBox.setVisible(!bVisible); // toggle visibility
+            }
+        },
+
+
         formatDate: function (sDate) {
             if (!sDate) return "";
             var oDate = new Date(sDate);

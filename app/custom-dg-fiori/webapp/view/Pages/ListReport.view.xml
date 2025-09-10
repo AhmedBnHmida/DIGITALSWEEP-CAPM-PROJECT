@@ -6,18 +6,25 @@
     <Page showHeader="false">
         <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
 
+            <!-- Toolbar for search section header -->
+            <Toolbar>
+                <Title text="Filters"/>
+                <ToolbarSpacer/>
+                <Button text="Hide All Filters" icon="sap-icon://hide" press=".onHideAllFilters"/>
+            </Toolbar>
+
             <!-- Search Section -->
-            <VBox class="sapUiSmallMargin">
+            <VBox class="sapUiSmallMargin"  id="filtersVBox" >
                 <HBox class="sapUiSmallMargin" wrap="Wrap">
 
                     <!-- Global Search -->
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="globalSearchVBox" visible="true" >
                         <Label text="Global Search:" labelFor="globalSearch1"/>
                         <SearchField id="globalSearch1" width="25rem" liveChange=".onFilterChange" placeholder="Search all fields..." />
                     </VBox>
 
-                    <!-- MultiComboBox Filters -->
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Country Filter -->
+                    <VBox class="sapUiSmallMargin" id="countrySearchVBox" visible="true">
                         <Label text="Country:" labelFor="countrySearch1"/>
                         <MultiComboBox id="countrySearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Country"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Country))' } }">
@@ -25,7 +32,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Segment Filter -->
+                    <VBox class="sapUiSmallMargin" id="segmentSearchVBox" visible="true" >
                         <Label text="Segment:" labelFor="segmentSearch1"/>
                         <MultiComboBox id="segmentSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Segment"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Segment))' } }">
@@ -33,7 +41,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Product Filter -->
+                    <VBox class="sapUiSmallMargin" id="productSearchVBox" visible="false">
                         <Label text="Product:" labelFor="productSearch1"/>
                         <MultiComboBox id="productSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Product"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Product))' } }">
@@ -41,7 +50,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Discount Band Filter -->
+                    <VBox class="sapUiSmallMargin" id="discountBandSearchVBox" visible="false">
                         <Label text="Discount Band:" labelFor="discountBandSearch1"/>
                         <MultiComboBox id="discountBandSearch1" width="15rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Discount Band"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Discount_Band))' } }">
@@ -49,8 +59,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <!-- Month Filters -->
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Month Name Filter -->
+                    <VBox class="sapUiSmallMargin" id="monthNameSearchVBox" visible="false">
                         <Label text="Month Name:" labelFor="monthNameSearch1"/>
                         <MultiComboBox id="monthNameSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Month"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Name))' } }">
@@ -58,7 +68,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Month Number Filter -->
+                    <VBox class="sapUiSmallMargin" id="monthNumberSearchVBox" visible="false">
                         <Label text="Month Number:" labelFor="monthNumberSearch1"/>
                         <MultiComboBox id="monthNumberSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Month Number"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Month_Number))' } }">
@@ -66,7 +77,8 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Year Filter -->
+                    <VBox class="sapUiSmallMargin" id="yearSearchVBox" visible="false">
                         <Label text="Year:" labelFor="yearSearch1"/>
                         <MultiComboBox id="yearSearch1" width="12rem" selectionFinish=".onFilterChange" showSecondaryValues="true" placeholder="Select Year"
                             items="{ path: '/Finances', parameters: { $apply: 'groupby((Year))' } }">
@@ -74,14 +86,14 @@
                         </MultiComboBox>
                     </VBox>
 
-                    <!-- Date -->
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Date Filter -->
+                    <VBox class="sapUiSmallMargin" id="dateSearchVBox" visible="true">
                         <Label text="Date:" labelFor="dateSearch1"/>
                         <DatePicker id="dateSearch1" change=".onFilterChange" displayFormat="yyyy-MM-dd" width="12rem"/>
                     </VBox>
 
-                    <!-- Decimal Filters -->
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Decimal Filters (example: Profit) -->
+                    <VBox class="sapUiSmallMargin" id="profitVBox" visible="true">
                         <Label text="Profit (Min-Max)" labelFor="profitMin"/>
                         <HBox>
                             <Input id="profitMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -89,7 +101,8 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <!-- Repeat same wrapping for other decimal fields: COGS, Sales, Sale Price, Gross Sales, Manufacturing Price, Units Sold, Discounts -->
+                    <VBox class="sapUiSmallMargin" id="cogsVBox" visible="false">
                         <Label text="COGS (Min-Max)" labelFor="cogsMin"/>
                         <HBox>
                             <Input id="cogsMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -97,7 +110,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="salesVBox" visible="false">
                         <Label text="Sales (Min-Max)" labelFor="salesMin"/>
                         <HBox>
                             <Input id="salesMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -105,7 +118,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="salePriceVBox" visible="false">
                         <Label text="Sale Price (Min-Max)" labelFor="salePriceMin"/>
                         <HBox>
                             <Input id="salePriceMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -113,7 +126,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="grossSalesVBox" visible="false">
                         <Label text="Gross Sales (Min-Max)" labelFor="grossSalesMin"/>
                         <HBox>
                             <Input id="grossSalesMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -121,7 +134,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="manuPriceVBox" visible="false">
                         <Label text="Manufacturing Price (Min-Max)" labelFor="manuPriceMin"/>
                         <HBox>
                             <Input id="manuPriceMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -129,7 +142,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="unitsSoldVBox" visible="false">
                         <Label text="Units Sold (Min-Max)" labelFor="unitsSoldMin"/>
                         <HBox>
                             <Input id="unitsSoldMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -137,7 +150,7 @@
                         </HBox>
                     </VBox>
 
-                    <VBox class="sapUiSmallMargin">
+                    <VBox class="sapUiSmallMargin" id="discountsVBox" visible="false">
                         <Label text="Discounts (Min-Max)" labelFor="discountsMin"/>
                         <HBox>
                             <Input id="discountsMin" width="6rem" placeholder="Min" liveChange=".onFilterChange"/>
@@ -160,6 +173,7 @@
                     <Toolbar>
                         <Title text="Finance Data"/>
                         <ToolbarSpacer/>
+                         <Button text="Select Filters" icon="sap-icon://filter-fields" press=".onSelectFilters"/>
                         <Button text="Choose Columns" icon="sap-icon://multi-select" press=".onShowColumnSelection"/>
                         <Button text="Create" icon="sap-icon://add" press=".onCreatePress"/>
                     </Toolbar>
