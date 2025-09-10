@@ -10,12 +10,15 @@ sap.ui.define([
     "sap/m/CheckBox",
     "sap/m/VBox",
     "sap/m/ButtonType",
-    "sap/ui/model/json/JSONModel"
-], function (Controller, History, MessageBox, Text, HBox, Button, Dialog, Label, CheckBox, VBox, ButtonType, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, History, MessageBox, Text, HBox, Button, Dialog, Label, CheckBox, VBox, ButtonType, JSONModel, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("customdgfiori.controller.Pages.ListReport", {
         onInit: function () {
+            // Columns config with visibility flags
             var aColumnsConfig = [
                 { key: "Segment", label: "Segment", visible: true },
                 { key: "Country", label: "Country", visible: true },
@@ -29,8 +32,12 @@ sap.ui.define([
                 { key: "Sales", label: "Sales", visible: true },
                 { key: "COGS", label: "COGS", visible: false },
                 { key: "Profit", label: "Profit", visible: true },
-                { key: "Date", label: "Date", visible: true }
-                // Add other columns as needed...
+                { key: "Date", label: "Date", visible: true },
+                // Added new attributes
+                { key: "Month_Number", label: "Month Number", visible: false },
+                { key: "Month_Name", label: "Month Name", visible: false },
+                { key: "Year", label: "Year", visible: false },
+                { key: "ExchangeRateToEUR", label: "Exchange Rate to EUR", visible: false }
             ];
 
             var oColumnsModel = new JSONModel({ columns: aColumnsConfig });
@@ -44,33 +51,33 @@ sap.ui.define([
             oTable.removeAllColumns();
 
             var aColumns = this.getView().getModel("columnsModel").getProperty("/columns");
-            this._visibleColumns = aColumns.filter(function (col) { return col.visible; });
+            this._visibleColumns = aColumns.filter(col => col.visible);
 
-            // Create columns dynamically based on visibility
-            this._visibleColumns.forEach(function (col) {
+            // Add dynamic columns
+            this._visibleColumns.forEach(col => {
                 oTable.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: col.label })
                 }));
             });
 
-            // Add an "Actions" column (always visible)
+            // Add actions column
             oTable.addColumn(new sap.m.Column({
                 header: new sap.m.Label({ text: "Actions" }),
                 width: "12rem"
             }));
 
-            // Bind items with factory template dynamically creating cells + action buttons
+            // Bind items with dynamic cells and action buttons
             oTable.bindItems({
                 path: "/Finances",
                 template: new sap.m.ColumnListItem({
-                    cells: this._visibleColumns.map(function (col) {
+                    cells: this._visibleColumns.map(col => {
                         return new sap.m.Text({
                             text: {
                                 path: col.key,
                                 formatter: col.key === "Date" ? this.formatDate : undefined
                             }
                         });
-                    }, this).concat(
+                    }).concat(
                         new HBox({
                             justifyContent: "Center",
                             items: [
@@ -85,7 +92,6 @@ sap.ui.define([
         },
 
         onShowColumnSelection: function () {
-            // Create a Dialog with checkboxes to select visible columns
             var oModel = this.getView().getModel("columnsModel");
             var aColumns = oModel.getProperty("/columns");
 
@@ -94,7 +100,7 @@ sap.ui.define([
                 var oCheckBox = new CheckBox({
                     text: col.label,
                     selected: col.visible,
-                    select: function(oEvent) {
+                    select: function (oEvent) {
                         aColumns[idx].visible = oEvent.getParameter("selected");
                     }
                 });
@@ -108,28 +114,63 @@ sap.ui.define([
                     text: "Apply",
                     press: function () {
                         oModel.setProperty("/columns", aColumns);
-                        this._buildTable(); // rebuild table with updated visibility
+                        this._buildTable();
                         oDialog.close();
                     }.bind(this)
                 }),
                 endButton: new Button({
                     text: "Cancel", press: function () { oDialog.close(); }
                 }),
-                afterClose: function () { oDialog.destroy(); }
+                afterClose: function () {
+                    oDialog.destroy();
+                }
             });
 
             this.getView().addDependent(oDialog);
             oDialog.open();
         },
 
-        onNavBack: function () {
-            var oHistory = History.getInstance();
-            var sPreviousHash = oHistory.getPreviousHash();
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this.getOwnerComponent().getRouter().navTo("RouteView1", {}, true);
+        onFilterChange: function () {
+            var oView = this.getView();
+            var oTable = this.byId("financeTable");
+            var oBinding = oTable.getBinding("items");
+
+            var aFilters = [];
+
+            // Global Search: OR filter on important columns
+            var sGlobalQuery = oView.byId("globalSearch1").getValue();
+            if (sGlobalQuery) {
+                var aGlobalFilters = [
+                    new Filter("Segment", FilterOperator.Contains, sGlobalQuery),
+                    new Filter("Country", FilterOperator.Contains, sGlobalQuery),
+                    new Filter("Product", FilterOperator.Contains, sGlobalQuery)
+                ];
+                aFilters.push(new Filter(aGlobalFilters, false)); // OR group
             }
+
+            // Country MultiComboBox: OR filter for selected countries
+            var aSelectedCountries = oView.byId("countrySearch1").getSelectedKeys();
+            if (aSelectedCountries.length > 0) {
+                var countryFilters = aSelectedCountries.map(c => new Filter("Country", FilterOperator.EQ, c));
+                aFilters.push(new Filter(countryFilters, false)); // OR between selected countries
+            }
+
+            // Segment MultiComboBox: OR filter for selected segments (changed from Select to MultiComboBox)
+            var aSelectedSegments = oView.byId("segmentSearch1").getSelectedKeys();
+            if (aSelectedSegments.length > 0) {
+                var segmentFilters = aSelectedSegments.map(s => new Filter("Segment", FilterOperator.EQ, s));
+                aFilters.push(new Filter(segmentFilters, false)); // OR between selected segments
+            }
+
+            // Date picker: EQ filter on date string formatted to yyyy-MM-dd
+            var oDate = oView.byId("dateSearch1").getDateValue();
+            if (oDate) {
+                var sDateStr = this.formatDate(oDate);
+                aFilters.push(new Filter("Date", FilterOperator.EQ, sDateStr));
+            }
+
+            // Apply combined filters with AND logic
+            oBinding.filter(aFilters.length ? new Filter(aFilters, true) : []);
         },
 
         onCreatePress: function () {
@@ -174,7 +215,11 @@ sap.ui.define([
 
         formatDate: function (sDate) {
             if (!sDate) return "";
-            return new Date(sDate).toLocaleDateString();
+            var oDate = new Date(sDate);
+            var yyyy = oDate.getFullYear();
+            var mm = String(oDate.getMonth() + 1).padStart(2, "0");
+            var dd = String(oDate.getDate()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}`;
         }
     });
 });
