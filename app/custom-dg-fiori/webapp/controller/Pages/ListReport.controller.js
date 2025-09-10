@@ -162,6 +162,43 @@ sap.ui.define([
                 aFilters.push(new Filter(segmentFilters, false)); // OR between selected segments
             }
 
+            // Product MultiComboBox: OR filter for selected products
+            var aSelectedProducts = oView.byId("productSearch1").getSelectedKeys();
+            if (aSelectedProducts.length > 0) {
+                var productFilters = aSelectedProducts.map(p => new Filter("Product", FilterOperator.EQ, p));
+                aFilters.push(new Filter(productFilters, false)); // OR between selected products
+            }
+
+            // Discount Band MultiComboBox: OR filter for selected discount bands
+            var aSelectedDiscounts = oView.byId("discountBandSearch1").getSelectedKeys();
+            if (aSelectedDiscounts.length > 0) {
+                var discountFilters = aSelectedDiscounts.map(d => new Filter("Discount_Band", FilterOperator.EQ, d));
+                aFilters.push(new Filter(discountFilters, false)); // OR between selected discount bands
+            }
+
+            // Month Name
+            var aSelectedMonths = oView.byId("monthNameSearch1").getSelectedKeys();
+            if (aSelectedMonths.length > 0) {
+                var monthFilters = aSelectedMonths.map(m => new Filter("Month_Name", FilterOperator.EQ, m));
+                aFilters.push(new Filter(monthFilters, false));
+            }
+
+            // Month Number
+            var aSelectedMonthNumbers = oView.byId("monthNumberSearch1").getSelectedKeys();
+            if (aSelectedMonthNumbers.length > 0) {
+                var monthNumFilters = aSelectedMonthNumbers.map(mn => new Filter("Month_Number", FilterOperator.EQ, mn));
+                aFilters.push(new Filter(monthNumFilters, false));
+            }
+
+            // Year
+            var aSelectedYears = oView.byId("yearSearch1").getSelectedKeys();
+            if (aSelectedYears.length > 0) {
+                var yearFilters = aSelectedYears.map(y => new Filter("Year", FilterOperator.EQ, y));
+                aFilters.push(new Filter(yearFilters, false));
+            }
+
+
+
             // Date picker: EQ filter on date string formatted to yyyy-MM-dd
             var oDate = oView.byId("dateSearch1").getDateValue();
             if (oDate) {

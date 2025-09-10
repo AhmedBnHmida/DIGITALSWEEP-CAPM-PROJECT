@@ -1,0 +1,100 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <VBox>
+        <HBox wrap="Wrap" class="sapUiSmallMargin">
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/0/visible}">
+                <Label text="Segment:" labelFor="SegmentMultiSelect"/>
+                <MultiComboBox
+                    id="SegmentMultiSelect"
+                    width="12rem"
+                    selectionChange=".onFilterChange"
+                    placeholder="Select Segment"
+                    items="{selectionModel>/Segments}">
+                    <core:Item key="{selectionModel>key}" text="{selectionModel>text}" />
+                </MultiComboBox>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/1/visible}">
+                <Label text="Country:" labelFor="CountryMultiSelect"/>
+                <MultiComboBox
+                    id="CountryMultiSelect"
+                    width="12rem"
+                    selectionChange=".onFilterChange"
+                    placeholder="Select Country"
+                    items="{selectionModel>/Countries}">
+                    <core:Item key="{selectionModel>key}" text="{selectionModel>text}" />
+                </MultiComboBox>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/2/visible}">
+                <Label text="Product:" labelFor="ProductMultiSelect"/>
+                <MultiComboBox
+                    id="ProductMultiSelect"
+                    width="12rem"
+                    selectionChange=".onFilterChange"
+                    placeholder="Select Product"
+                    items="{selectionModel>/Products}">
+                    <core:Item key="{selectionModel>key}" text="{selectionModel>text}" />
+                </MultiComboBox>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/3/visible}">
+                <Label text="Discount Band:" labelFor="Discount_BandMultiSelect"/>
+                <MultiComboBox
+                    id="Discount_BandMultiSelect"
+                    width="12rem"
+                    selectionChange=".onFilterChange"
+                    placeholder="Select Discount Band"
+                    items="{selectionModel>/Discount_Bands}">
+                    <core:Item key="{selectionModel>key}" text="{selectionModel>text}" />
+                </MultiComboBox>
+            </VBox>
+
+            <!-- Single input filters -->
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/4/visible}">
+                <Label text="Units Sold:" labelFor="Units_SoldSearch"/>
+                <SearchField id="Units_SoldSearch" liveChange=".onFilterChange" placeholder="Search Units Sold"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/5/visible}">
+                <Label text="Manufacturing Price:" labelFor="Manufacturing_PriceSearch"/>
+                <SearchField id="Manufacturing_PriceSearch" liveChange=".onFilterChange" placeholder="Search Manufacturing Price"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/6/visible}">
+                <Label text="Sale Price:" labelFor="Sale_PriceSearch"/>
+                <SearchField id="Sale_PriceSearch" liveChange=".onFilterChange" placeholder="Search Sale Price"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/7/visible}">
+                <Label text="Gross Sales:" labelFor="Gross_SalesSearch"/>
+                <SearchField id="Gross_SalesSearch" liveChange=".onFilterChange" placeholder="Search Gross Sales"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/8/visible}">
+                <Label text="Discounts:" labelFor="DiscountsSearch"/>
+                <SearchField id="DiscountsSearch" liveChange=".onFilterChange" placeholder="Search Discounts"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/9/visible}">
+                <Label text="Sales:" labelFor="SalesSearch"/>
+                <SearchField id="SalesSearch" liveChange=".onFilterChange" placeholder="Search Sales"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/10/visible}">
+                <Label text="COGS:" labelFor="COGSSearch"/>
+                <SearchField id="COGSSearch" liveChange=".onFilterChange" placeholder="Search COGS"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/11/visible}">
+                <Label text="Profit:" labelFor="ProfitSearch"/>
+                <SearchField id="ProfitSearch" liveChange=".onFilterChange" placeholder="Search Profit"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/12/visible}">
+                <Label text="Date:" labelFor="dateSearch"/>
+                <DatePicker id="dateSearch" change=".onFilterChange" displayFormat="yyyy-MM-dd" width="12rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/13/visible}">
+                <Label text="Month Number:" labelFor="Month_NumberSearch"/>
+                <SearchField id="Month_NumberSearch" liveChange=".onFilterChange" placeholder="Search Month Number"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/14/visible}">
+                <Label text="Month Name:" labelFor="Month_NameSearch"/>
+                <SearchField id="Month_NameSearch" liveChange=".onFilterChange" placeholder="Search Month Name"/>
+            </VBox>
+            <VBox class="sapUiSmallMargin" visible="{filtersModel>/filters/15/visible}">
+                <Label text="Year:" labelFor="YearSearch"/>
+                <SearchField id="YearSearch" liveChange=".onFilterChange" placeholder="Search Year"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>
