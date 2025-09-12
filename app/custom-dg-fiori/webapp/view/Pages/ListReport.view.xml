@@ -175,6 +175,8 @@
                     <Toolbar>
                         <Title text="Finance Data"/>
                         <ToolbarSpacer/>
+                     <!--   <Button text="See All Rows" icon="sap-icon://full-screen" press=".onSeeAllRowsPress"/>-->
+                        <Button text="Export" icon="sap-icon://download" press=".onExportPress"/>
                          <Button text="Select Filters" icon="sap-icon://filter-fields" press=".onSelectFilters"/>
                         <Button text="Choose Columns" icon="sap-icon://multi-select" press=".onShowColumnSelection"/>
                         <Button text="Create" icon="sap-icon://add" press=".onCreatePress"/>

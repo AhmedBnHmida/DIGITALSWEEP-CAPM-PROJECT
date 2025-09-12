@@ -12,8 +12,9 @@ sap.ui.define([
     "sap/m/ButtonType",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
+    "sap/ui/export/Spreadsheet",
     "sap/ui/model/FilterOperator"
-], function (Controller, History, MessageBox, Text, HBox, Button, Dialog, Label, CheckBox, VBox, ButtonType, JSONModel, Filter, FilterOperator) {
+], function (Controller, History, MessageBox, Text, HBox, Button, Dialog, Label, CheckBox, VBox, ButtonType, JSONModel, Filter, FilterOperator, Spreadsheet) {
     "use strict";
 
     return Controller.extend("customdgfiori.controller.Pages.ListReport", {
@@ -352,6 +353,112 @@ sap.ui.define([
             var mm = String(oDate.getMonth() + 1).padStart(2, "0");
             var dd = String(oDate.getDate()).padStart(2, "0");
             return `${yyyy}-${mm}-${dd}`;
-        }
+        },
+
+
+    /**************************************** */
+onSeeAllRowsPress: function () {
+    var oTable = this.byId("financeTable");
+    var oBinding = oTable.getBinding("items");
+
+    if (!oBinding) return;
+
+    // Set threshold to the total number of rows (after filters applied)
+    oTable.setGrowingThreshold(oBinding.getLength());
+
+    // Refresh to render all rows
+    oBinding.refresh();
+},
+
+
+
+
+
+    /*************************** EXPORT DATA ******************************************************* */
+/*************************** EXPORT DATA *******************************************************/
+onExportPress: function () {
+    var oTable = this.byId("financeTable");
+    var oBinding = oTable.getBinding("items");
+    if (!oBinding) {
+        MessageBox.information("No data to export.");
+        return;
+    }
+
+    // Get all current filtered rows
+    var aContexts = oBinding.getContexts(0, oBinding.getLength());
+    if (!aContexts || aContexts.length === 0) {
+        MessageBox.information("No data to export.");
+        return;
+    }
+
+    var aData = aContexts.map(ctx => ctx.getObject());
+
+    // Create preview table (first 10 rows)
+    var oPreviewTable = new sap.m.Table({
+        inset: true,
+        columns: this._visibleColumns.map(col => new sap.m.Column({
+            header: new sap.m.Label({ text: col.label })
+        }))
+    });
+
+    aData.slice(0, 10).forEach(row => {
+        oPreviewTable.addItem(new sap.m.ColumnListItem({
+            cells: this._visibleColumns.map(col => new sap.m.Text({ text: row[col.key] }))
+        }));
+    });
+
+    // Dialog content
+    var oVBox = new sap.m.VBox({
+        items: [
+            new sap.m.Label({ text: "Preview (first 10 rows):", design: "Bold" }),
+            oPreviewTable
+        ]
+    });
+
+    var oDialog = new Dialog({
+        title: "Export Data",
+        content: oVBox,
+        beginButton: new Button({
+            text: "Export",
+            press: function () {
+                // Export all filtered data to Excel
+                this._exportToExcel(aData);
+                oDialog.close();
+            }.bind(this)
+        }),
+        endButton: new Button({ text: "Cancel", press: function () { oDialog.close(); } }),
+        afterClose: function () { oDialog.destroy(); }
+    });
+
+    this.getView().addDependent(oDialog);
+    oDialog.open();
+},
+
+// Excel export helper
+_exportToExcel: function (aData) {
+    // Assuming you have a utility for Excel export (SheetJS or SAPUI5 Export API)
+    // Example using sap.ui.export.Spreadsheet:
+    var aCols = this._visibleColumns.map(col => ({
+        label: col.label,
+        property: col.key,
+        type: "string"
+    }));
+
+    var oSettings = {
+        workbook: { columns: aCols },
+        dataSource: aData,
+        fileName: "FinanceData.xlsx"
+    };
+
+    var oSheet = new sap.ui.export.Spreadsheet(oSettings);
+    oSheet.build().finally(function () {
+        oSheet.destroy();
+    });
+}
+
+
+
+
+
     });
 });
